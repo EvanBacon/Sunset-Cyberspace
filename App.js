@@ -9,10 +9,7 @@ import Preload from './components/Preload';
   Inspired by WebGL tutorial: https://www.airtightinteractive.com/2015/01/building-a-60fps-webgl-game-on-mobile/
 */
 
-/// Import web shim for three.js methods
-require('./src/GameShader');
-
-// Import Shaders
+require('./game/GameShader');
 require('three/examples/js/shaders/CopyShader');
 require('three/examples/js/postprocessing/EffectComposer');
 require('three/examples/js/postprocessing/RenderPass');

@@ -4,7 +4,7 @@ import React from 'react';
 
 import TouchableView from '../components/TouchableView';
 import Colors from '../constants/Colors';
-import Game from '../src/Game';
+import Game from '../game/Game';
 
 require('three/examples/js/shaders/FXAAShader');
 

@@ -7,6 +7,7 @@ import Assets from '../Assets';
 const AnimatableImageBackground = Animatable.createAnimatableComponent(
   ImageBackground,
 );
+
 const LoadingScreen = () => (
   <AnimatableImageBackground
     pointerEvents="none"
