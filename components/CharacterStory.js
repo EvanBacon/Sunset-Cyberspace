@@ -64,13 +64,11 @@ export default class CharacterScene extends React.Component {
         duration={transition || 200}
         style={{
           ...StyleSheet.absoluteFillObject,
-          backgroundColor: 'black',
-        }}>
+        }}
+      >
         <Image
-          style={{
-            resizeMode: 'contain',
-            ...StyleSheet.absoluteFillObject,
-          }}
+          resizeMode="cover"
+          style={[StyleSheet.absoluteFill, { width: '100%', height: '100%' }]}
           source={image}
         />
         <CharacterStory

@@ -19,7 +19,8 @@
       "assetExts": ["ttf", "mp4", "obj", "jpg", "txt", "json"]
     },
     "ios": {
-      "appStoreUrl": "https://itunes.apple.com/us/app/sunset-cyberspace/id1332439319?ls=1&mt=8",
+      "appStoreUrl":
+        "https://itunes.apple.com/us/app/sunset-cyberspace/id1332439319?ls=1&mt=8",
       "supportsTablet": true,
       "bundleIdentifier": "com.evanbacon.cyberspace",
       "buildNumber": "0.0.1",
@@ -35,7 +36,8 @@
       }
     },
     "android": {
-      "playStoreUrl": "https://play.google.com/store/apps/details?id=com.evanbacon.cyberspace",
+      "playStoreUrl":
+        "https://play.google.com/store/apps/details?id=com.evanbacon.cyberspace",
       "icon": "./assets/android_icon.png",
       "package": "com.evanbacon.cyberspace",
       "versionCode": 1
