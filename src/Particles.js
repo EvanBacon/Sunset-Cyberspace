@@ -2,10 +2,11 @@ import ExpoTHREE, { THREE } from 'expo-three';
 import ImprovedNoise from 'improved-noise';
 import { Platform } from 'react-native';
 
+import Assets from '../Assets';
 import Colors from '../constants/Colors';
-import Images from '../constants/Images';
 import Settings from '../constants/Settings';
 import Background from './Background';
+
 const isIPhone = Platform.OS === 'ios';
 
 const PARTICLES_COUNT = isIPhone ? 400 : 200;
@@ -42,15 +43,15 @@ export default class Particles {
         new THREE.Vector3(
           randomRange(-Settings.FLOOR_WIDTH / 2, Settings.FLOOR_WIDTH / 2),
           randomRange(PARTICLES_BOTTOM, PARTICLES_TOP),
-          randomRange(-Settings.FLOOR_DEPTH / 2, Settings.FLOOR_DEPTH / 2)
-        )
+          randomRange(-Settings.FLOOR_DEPTH / 2, Settings.FLOOR_DEPTH / 2),
+        ),
       );
     }
 
     const particlesMaterial = new THREE.PointsMaterial({
       size: 50,
       // sizeAttenuation: true,
-      map: await ExpoTHREE.loadAsync(Images['particle']),
+      map: await ExpoTHREE.loadAsync(Assets.images['particle.png']),
       transparent: true,
       blending: THREE.AdditiveBlending,
       depthTest: true,
@@ -58,7 +59,9 @@ export default class Particles {
       depthWrite: false,
     });
 
-    this.level.moverGroup.add(new THREE.Points(this.particlesGeometry, particlesMaterial));
+    this.level.moverGroup.add(
+      new THREE.Points(this.particlesGeometry, particlesMaterial),
+    );
 
     //STRIPS
     //add bars for at high speed
@@ -87,9 +90,15 @@ export default class Particles {
       bar.rotation.x = Math.PI / 2;
       bar.rotation.y = Math.PI / 2;
 
-      bar.position.x = randomRange(-Settings.FLOOR_WIDTH / 2, Settings.FLOOR_WIDTH / 2);
+      bar.position.x = randomRange(
+        -Settings.FLOOR_WIDTH / 2,
+        Settings.FLOOR_WIDTH / 2,
+      );
       bar.position.y = randomRange(-300, 600);
-      bar.position.z = randomRange(-Settings.FLOOR_DEPTH / 2, Settings.FLOOR_DEPTH / 2);
+      bar.position.z = randomRange(
+        -Settings.FLOOR_DEPTH / 2,
+        Settings.FLOOR_DEPTH / 2,
+      );
 
       this.bars.push(bar);
     }
@@ -104,7 +113,10 @@ export default class Particles {
       let vert = this.particlesGeometry.vertices[i];
       vert.z += Settings.MOVE_STEP;
 
-      if (vert.z + this.level.moverGroup.position.z > Settings.FLOOR_DEPTH / 2) {
+      if (
+        vert.z + this.level.moverGroup.position.z >
+        Settings.FLOOR_DEPTH / 2
+      ) {
         vert.z -= Settings.FLOOR_DEPTH;
       }
     }
@@ -123,7 +135,8 @@ export default class Particles {
     //global perlin wind
     this.particlesTime += 0.001;
     this.windStrength = this.snoise.noise(this.particlesTime, 0, 0) * 20;
-    this.windDir = (this.snoise.noise(this.particlesTime + 100, 0, 0) + 1) / 2 * Math.PI * 2;
+    this.windDir =
+      (this.snoise.noise(this.particlesTime + 100, 0, 0) + 1) / 2 * Math.PI * 2;
 
     for (let i = 0; i < PARTICLES_COUNT; i++) {
       let vert = this.particlesGeometry.vertices[i];

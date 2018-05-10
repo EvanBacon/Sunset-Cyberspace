@@ -1,7 +1,6 @@
 import ExpoGraphics from 'expo-graphics';
 import ExpoTHREE, { THREE } from 'expo-three';
 import React from 'react';
-import { Dimensions, PixelRatio } from 'react-native';
 
 import Colors from '../constants/Colors';
 import Game from '../src/Game';
@@ -19,30 +18,29 @@ class GameScreen extends React.Component {
       shouldCancelWhenOutside={false}
       onTouchesBegan={event => this.game.onTouchesBegan(event)}
       onTouchesMoved={event => this.game.onTouchesMoved(event)}
-      onTouchesEnded={event => this.game.onTouchesEnded(event)}>
+      onTouchesEnded={event => this.game.onTouchesEnded(event)}
+    >
       <ExpoGraphics.View
         style={{ flex: 1 }}
-        onContextCreate={this._onContextCreate}
-        onRender={this._animate}
+        onContextCreate={this.onContextCreate}
+        onRender={this.onRender}
         onResize={this.onResize}
       />
     </TouchableView>
   );
 
-  _onContextCreate = async (gl, arSession) => {
-    global.supportsEffects = gl.createRenderbuffer != null;
+  onContextCreate = async ({ gl, width, height, scale }) => {
+    // global.supportsEffects = gl.createRenderbuffer != null;
 
-    gl.createRenderbuffer = gl.createRenderbuffer || (() => ({}));
-    gl.bindRenderbuffer = gl.bindRenderbuffer || (() => ({}));
-    gl.renderbufferStorage = gl.renderbufferStorage || (() => ({}));
-    gl.framebufferRenderbuffer = gl.framebufferRenderbuffer || (() => ({}));
-
-    const { width, height, scale } = Dimensions.get('window');
+    // gl.createRenderbuffer = gl.createRenderbuffer || (() => ({}));
+    // gl.bindRenderbuffer = gl.bindRenderbuffer || (() => ({}));
+    // gl.renderbufferStorage = gl.renderbufferStorage || (() => ({}));
+    // gl.framebufferRenderbuffer = gl.framebufferRenderbuffer || (() => ({}));
 
     const crazy = false;
 
     // renderer
-    this.renderer = ExpoTHREE.createRenderer({
+    this.renderer = ExpoTHREE.renderer({
       gl,
       // precision: crazy ? 'highp' : 'mediump',
       antialias: false, //crazy ? true : false,
@@ -62,6 +60,7 @@ class GameScreen extends React.Component {
 
     // setup custom world
     await this._setupWorld();
+    this.onResize({ width, height, scale });
   };
 
   _setupWorld = async () => {
@@ -70,25 +69,24 @@ class GameScreen extends React.Component {
       this.scene,
       this.renderer,
       this.props.onPlay,
-      this.props.updateScore
+      this.props.updateScore,
     );
     await this.game.init();
     this.props.onGameLoaded();
   };
 
-  onResize = ({ width, height }) => {
+  onResize = ({ width, height, scale }) => {
     if (!this.game) {
       return;
     }
-    const scale = PixelRatio.get();
     this.camera.aspect = width / height;
     this.camera.updateProjectionMatrix();
     this.renderer.setPixelRatio(scale);
     this.renderer.setSize(width, height);
-    this.game.onResize();
+    this.game.onResize({ width, height, scale });
   };
 
-  _animate = delta => {
+  onRender = delta => {
     this.game.animate(delta);
   };
 }

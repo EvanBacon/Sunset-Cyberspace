@@ -3,10 +3,15 @@ import { THREE } from 'expo-three';
 import Colors from '../constants/Colors';
 import Settings from '../constants/Settings';
 import Node from './Node';
+
 class Lighting extends Node {
   setupAsync = async () => {
     //lights
-    const hemisphereLight = new THREE.HemisphereLight(Colors.light, Colors.dark, 0.6);
+    const hemisphereLight = new THREE.HemisphereLight(
+      Colors.light,
+      Colors.dark,
+      0.6,
+    );
     hemisphereLight.position.y = 300;
     this.add(hemisphereLight);
     //middle light

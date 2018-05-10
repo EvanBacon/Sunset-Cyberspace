@@ -1,19 +1,21 @@
 import React from 'react';
-import { ImageBackground, StyleSheet } from 'react-native';
+import { ImageBackground, Text, StyleSheet } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 
-import Images from '../constants/Images';
-import { Retro } from './Text';
+import Assets from '../Assets';
 
-const AnimatableImageBackground = Animatable.createAnimatableComponent(ImageBackground);
+const AnimatableImageBackground = Animatable.createAnimatableComponent(
+  ImageBackground,
+);
 const LoadingScreen = () => (
   <AnimatableImageBackground
     pointerEvents="none"
     useNativeDriver
     animation={'fadeIn'}
     style={styles.loadingImage}
-    source={Images['loading']}>
-    <Retro.Regular style={styles.loadingText}>LOADING...</Retro.Regular>
+    source={Assets.images['loading.gif']}
+  >
+    <Text style={styles.loadingText}>LOADING...</Text>
   </AnimatableImageBackground>
 );
 
@@ -33,6 +35,7 @@ const styles = StyleSheet.create({
   },
   loadingText: {
     fontSize: 64,
+    fontFamily: 'Retro-Regular',
     color: 'white',
     textAlign: 'center',
   },

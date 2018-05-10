@@ -1,7 +1,7 @@
 import Expo from 'expo';
-import Audio from './constants/Audio';
-import arrayFromObject from './utils/arrayFromObject';
-import cacheAssetsAsync from './utils/cacheAssetsAsync';
+
+import AssetUtils from 'expo-asset-utils';
+import Assets from './Assets';
 
 class AudioManager {
   sounds = {};
@@ -44,23 +44,15 @@ class AudioManager {
     });
 
   setupAudioAsync = async () => {
-    const keys = Object.keys(Audio);
+    const keys = Object.keys(Assets.audio);
     for (let key of keys) {
-      const item = Audio[key];
+      const item = Assets.audio[key];
       this.sounds[key] = (await Expo.Audio.Sound.create(item)).sound;
     }
   };
 
-  downloadAsync = async () =>
-    cacheAssetsAsync({
-      files: [...arrayFromObject(Audio)],
-    });
-
-  setupAsync = async () => {
-    await this.configureExperienceAudioAsync();
-    await this.downloadAsync();
-    await this.setupAudioAsync();
-  };
+  setupAsync = () =>
+    Promise.all([this.configureExperienceAudioAsync(), this.setupAudioAsync()]);
 }
 
 AudioManager.sharedInstance = new AudioManager();

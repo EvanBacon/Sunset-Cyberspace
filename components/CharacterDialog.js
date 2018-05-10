@@ -1,10 +1,8 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Platform, TouchableWithoutFeedback, View } from 'react-native';
+import { Platform, Text, TouchableWithoutFeedback, View } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import TypeWriter from 'react-native-typewriter';
-
-import { Retro } from './Text';
 
 const isIphone = Platform.OS === 'ios';
 
@@ -24,13 +22,15 @@ export default class CharacterDialog extends React.Component {
         minWidth: 256,
         bottom: 8,
       }}
-      onPress={this.props.onFinish}>
+      onPress={this.props.onFinish}
+    >
       <View
         style={{
           flex: 1,
           justifyContent: 'flex-end',
           alignItems: 'flex-start',
-        }}>
+        }}
+      >
         {this.props.image && (
           <Animatable.Image
             useNativeDriver
@@ -45,7 +45,8 @@ export default class CharacterDialog extends React.Component {
           animation={'fadeInLeftBig'}
           useNativeDriver
           duration={this.props.animate ? 1500 : 1}
-          delay={this.props.animate ? 500 : 1}>
+          delay={this.props.animate ? 500 : 1}
+        >
           <Animatable.View
             useNativeDriver
             onAnimationEnd={_ => {
@@ -61,7 +62,8 @@ export default class CharacterDialog extends React.Component {
               top: isIphone ? -12 : 0,
               paddingTop: isIphone ? 0 : 8,
               right: 0,
-            }}>
+            }}
+          >
             {this.props.name && <NameTag>{this.props.name}</NameTag>}
           </Animatable.View>
           <DialogBox
@@ -71,7 +73,8 @@ export default class CharacterDialog extends React.Component {
               setTimeout(() => {
                 this.props.onFinish();
               }, this.props.delayTime);
-            }}>
+            }}
+          >
             {this.props.dialog}
           </DialogBox>
         </Animatable.View>
@@ -94,9 +97,11 @@ export const NameTag = ({ children, style }) => (
         flexDirection: 'row',
         backgroundColor: 'transparent',
       },
-    ]}>
-    <Retro.Regular
+    ]}
+  >
+    <Text
       style={{
+        fontFamily: 'Retro-Regular',
         paddingHorizontal: 16,
         paddingVertical: 6,
         borderWidth: 3,
@@ -106,9 +111,10 @@ export const NameTag = ({ children, style }) => (
         textAlign: 'center',
         color: 'white',
         fontSize: 16,
-      }}>
+      }}
+    >
       {children}
-    </Retro.Regular>
+    </Text>
   </View>
 );
 
@@ -127,7 +133,8 @@ export const DialogBox = ({ children, hasName, style, typing, onFinish }) => (
         borderColor: colors.border,
         backgroundColor: colors.flat,
       },
-    ]}>
+    ]}
+  >
     <TypeWriter
       maxDelay={60}
       typing={typing}
@@ -135,7 +142,8 @@ export const DialogBox = ({ children, hasName, style, typing, onFinish }) => (
       style={[
         { fontFamily: 'Retro-Italic' },
         { textAlign: 'center', color: 'white', fontSize: 16 },
-      ]}>
+      ]}
+    >
       {children}
     </TypeWriter>
   </View>

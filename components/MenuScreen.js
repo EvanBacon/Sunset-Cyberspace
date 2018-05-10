@@ -1,14 +1,23 @@
 import React from 'react';
-import { Linking, StyleSheet, TouchableOpacity, View } from 'react-native';
+import {
+  Linking,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import * as Animatable from 'react-native-animatable';
 
-import Images from '../constants/Images';
-import { Retro } from './Text';
+import Assets from '../Assets';
 
 const MenuScreen = ({ score, playing, onStory }) => (
   <View pointerEvents="box-none" style={styles.menu}>
-    <Animatable.View useNativeDriver animation={'bounceInRight'} style={styles.scoreContainer}>
-      <Retro.Regular style={styles.scoreText}>{score}</Retro.Regular>
+    <Animatable.View
+      useNativeDriver
+      animation={'bounceInRight'}
+      style={styles.scoreContainer}
+    >
+      <Text style={styles.scoreText}>{score}</Text>
     </Animatable.View>
 
     <View pointerEvents="none" style={styles.imageWrapper}>
@@ -16,7 +25,7 @@ const MenuScreen = ({ score, playing, onStory }) => (
         useNativeDriver
         animation={playing ? 'bounceOutRight' : 'bounceInLeft'}
         style={styles.image}
-        source={Images.retro_subtitle}
+        source={Assets.images['retro_subtitle.png']}
       />
       <Animatable.View
         useNativeDriver
@@ -27,7 +36,8 @@ const MenuScreen = ({ score, playing, onStory }) => (
           position: 'absolute',
           width: '100%',
           height: '100%',
-        }}>
+        }}
+      >
         <Animatable.Image
           useNativeDriver
           delay={500}
@@ -35,7 +45,7 @@ const MenuScreen = ({ score, playing, onStory }) => (
           animation="pulse"
           easing="ease-out"
           style={styles.image}
-          source={Images.retro_title}
+          source={Assets.images['retro_title.png']}
         />
       </Animatable.View>
 
@@ -44,7 +54,7 @@ const MenuScreen = ({ score, playing, onStory }) => (
         animation={playing ? 'bounceOutLeft' : 'bounceInRight'}
         delay={500}
         style={styles.image}
-        source={Images.retro_last_title}
+        source={Assets.images['retro_last_title.png']}
       />
     </View>
 
@@ -52,7 +62,8 @@ const MenuScreen = ({ score, playing, onStory }) => (
       style={{ zIndex: 2, position: 'absolute', top: 8, left: 8, width: 128 }}
       animation={playing ? 'bounceOut' : 'pulse'}
       easing="ease-out"
-      iterationCount={playing ? 1 : 'infinite'}>
+      iterationCount={playing ? 1 : 'infinite'}
+    >
       <Button title="VIEW STORY" onPress={onStory} />
     </Animatable.View>
 
@@ -66,7 +77,8 @@ const MenuScreen = ({ score, playing, onStory }) => (
       }}
       animation={playing ? 'bounceOut' : 'pulse'}
       easing="ease-out"
-      iterationCount={playing ? 1 : 'infinite'}>
+      iterationCount={playing ? 1 : 'infinite'}
+    >
       <Button
         title={'SONG'}
         onPress={() => {
@@ -80,10 +92,21 @@ const MenuScreen = ({ score, playing, onStory }) => (
 const Button = ({ onPress, title, style }) => (
   <TouchableOpacity
     onPress={onPress}
-    style={[style, { padding: 12, justifyContent: 'center', alignItems: 'center' }]}>
-    <Retro.Regular style={{ fontSize: 24, color: 'white', textAlign: 'center' }}>
+    style={[
+      style,
+      { padding: 12, justifyContent: 'center', alignItems: 'center' },
+    ]}
+  >
+    <Text
+      style={{
+        fontFamily: 'Retro-Regular',
+        fontSize: 24,
+        color: 'white',
+        textAlign: 'center',
+      }}
+    >
       {title}
-    </Retro.Regular>
+    </Text>
   </TouchableOpacity>
 );
 
@@ -102,6 +125,7 @@ const styles = StyleSheet.create({
   scoreText: {
     fontSize: 64,
     color: 'white',
+    fontFamily: 'Retro-Regular',
   },
   scoreContainer: {
     position: 'absolute',

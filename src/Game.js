@@ -30,7 +30,11 @@ export default class Game {
     this.onPlay = onPlay;
     this.onUpdateScore = onUpdateScore;
     this.camera.position.z = Settings.FLOOR_DEPTH / 2 - 300;
-    this.scene.fog = new THREE.Fog(Colors.fog, Settings.FLOOR_DEPTH / 2, Settings.FLOOR_DEPTH + 50);
+    this.scene.fog = new THREE.Fog(
+      Colors.fog,
+      Settings.FLOOR_DEPTH / 2,
+      Settings.FLOOR_DEPTH + 50,
+    );
     this.renderer.setClearColor(Colors.backgroundColor, 1);
   }
 
@@ -51,10 +55,14 @@ export default class Game {
     this.level = new Level(this);
 
     await this.level.init();
-    this.onResize();
 
     //fade in
-    TweenMax.fromTo(this.fxParams, 1, { brightness: -1 }, { brightness: 0, delay: 0.5 });
+    TweenMax.fromTo(
+      this.fxParams,
+      1,
+      { brightness: -1 },
+      { brightness: 0, delay: 0.5 },
+    );
   };
 
   animate = delta => {
@@ -81,15 +89,11 @@ export default class Game {
     }
   };
 
-  onResize() {
-    const { width, height, scale } = Dimensions.get('window');
+  onResize({ width, height, scale }) {
     this.width = width;
     this.height = height;
     const halfRes = isIPhone ? scale : scale / 2;
     this.composer.setSize(width * halfRes, height * halfRes);
-    //scale to fit and center splash
-    this.splashSize = Math.min(width, height) * 0.85;
-    this.splashSize = Math.min(this.splashSize, 500);
   }
 
   onScorePoint() {
@@ -112,7 +116,6 @@ export default class Game {
     if (this.score > this.hiScore) {
       this.hiScore = this.score;
     }
-    this.onResize();
     this.hueTime = 0;
   }
 

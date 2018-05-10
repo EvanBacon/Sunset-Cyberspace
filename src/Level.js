@@ -4,11 +4,10 @@ import ImprovedNoise from 'improved-noise';
 
 import AudioManager from '../AudioManager';
 import Colors from '../constants/Colors';
-import Models from '../constants/Models';
 import Settings from '../constants/Settings';
-import Particles from './Particles';
-import Lighting from './Lighting';
 import Collectible from './Collectible';
+import Lighting from './Lighting';
+import Particles from './Particles';
 
 const ACCEL = 2000;
 const MAX_SPEED_ACCEL = 70;
@@ -71,7 +70,7 @@ export default class Level {
       Settings.FLOOR_WIDTH + 1200,
       Settings.FLOOR_DEPTH,
       FLOOR_RES,
-      FLOOR_RES
+      FLOOR_RES,
     );
     const floorMesh = new THREE.Mesh(this.floorGeometry, [this.floorMaterial]);
     floorGroup.add(floorMesh);
@@ -100,8 +99,10 @@ export default class Level {
       this.moverGroup.add(obstacle);
       obstacle.posi = Math.random();
       obstacle.posj = Math.random();
-      obstacle.position.x = obstacle.posj * Settings.FLOOR_WIDTH - Settings.FLOOR_WIDTH / 2;
-      obstacle.position.z = -(obstacle.posi * Settings.FLOOR_DEPTH) + Settings.FLOOR_DEPTH / 2;
+      obstacle.position.x =
+        obstacle.posj * Settings.FLOOR_WIDTH - Settings.FLOOR_WIDTH / 2;
+      obstacle.position.z =
+        -(obstacle.posi * Settings.FLOOR_DEPTH) + Settings.FLOOR_DEPTH / 2;
       obstacle.position.y = Math.random() * -150 - 50;
       // obstacle.rotation.y = Math.random() * Math.PI * 2;
       this.obstacles.push(obstacle);
@@ -117,7 +118,8 @@ export default class Level {
       this.moverGroup.add(obstacle);
       obstacle.position.x = Settings.FLOOR_WIDTH / 2 + 300;
       obstacle.position.z =
-        Settings.FLOOR_DEPTH * i / EDGE_OBSTACLE_COUNT - Settings.FLOOR_DEPTH / 2;
+        Settings.FLOOR_DEPTH * i / EDGE_OBSTACLE_COUNT -
+        Settings.FLOOR_DEPTH / 2;
     }
 
     for (let i = 0; i < EDGE_OBSTACLE_COUNT; i++) {
@@ -127,14 +129,20 @@ export default class Level {
       this.moverGroup.add(obstacle);
       obstacle.position.x = -(Settings.FLOOR_WIDTH / 2 + 300);
       obstacle.position.z =
-        Settings.FLOOR_DEPTH * i / EDGE_OBSTACLE_COUNT - Settings.FLOOR_DEPTH / 2;
+        Settings.FLOOR_DEPTH * i / EDGE_OBSTACLE_COUNT -
+        Settings.FLOOR_DEPTH / 2;
     }
 
     this.collectible = new Collectible();
     await this.collectible.setupAsync();
     this.moverGroup.add(this.collectible);
 
-    TweenMax.fromTo(this.game.fxParams, 0.3, { brightness: 0 }, { brightness: -1 });
+    TweenMax.fromTo(
+      this.game.fxParams,
+      0.3,
+      { brightness: 0 },
+      { brightness: -1 },
+    );
 
     this.particles = new Particles(this);
     await this.particles.init();
@@ -153,8 +161,12 @@ export default class Level {
     cone.add(
       new THREE.LineSegments(
         new THREE.WireframeGeometry(this.obstacleGeom),
-        new THREE.LineBasicMaterial({ color, transparent: true, linewidth: LINE_WIDTH })
-      )
+        new THREE.LineBasicMaterial({
+          color,
+          transparent: true,
+          linewidth: LINE_WIDTH,
+        }),
+      ),
     );
     obstacle.add(cone);
     obstacle.scale.set(scale, scale, scale);
@@ -171,7 +183,8 @@ export default class Level {
 
     //calculate vert psons base on noise
     let ipos;
-    const offset = this.stepCount * Settings.MOVE_STEP / Settings.FLOOR_DEPTH * FLOOR_RES;
+    const offset =
+      this.stepCount * Settings.MOVE_STEP / Settings.FLOOR_DEPTH * FLOOR_RES;
 
     for (let i = 0; i < FLOOR_RES + 1; i++) {
       for (let j = 0; j < FLOOR_RES + 1; j++) {
@@ -181,7 +194,7 @@ export default class Level {
           this.snoise.noise(
             ipos / FLOOR_RES * this.noiseScale,
             j / FLOOR_RES * this.noiseScale,
-            this.noiseSeed
+            this.noiseSeed,
           ) * FLOOR_THICKNESS;
       }
     }
@@ -192,13 +205,17 @@ export default class Level {
       const obstacle = this.obstacles[i];
       obstacle.position.z += Settings.MOVE_STEP;
 
-      if (obstacle.position.z + this.moverGroup.position.z > Settings.FLOOR_DEPTH / 2) {
+      if (
+        obstacle.position.z + this.moverGroup.position.z >
+        Settings.FLOOR_DEPTH / 2
+      ) {
         obstacle.collided = false;
         obstacle.position.z -= Settings.FLOOR_DEPTH;
         ipos = obstacle.posi + offset / FLOOR_RES * Settings.FLOOR_DEPTH;
         //re-randomize x pos
         obstacle.posj = Math.random();
-        obstacle.position.x = obstacle.posj * Settings.FLOOR_WIDTH - Settings.FLOOR_WIDTH / 2;
+        obstacle.position.x =
+          obstacle.posj * Settings.FLOOR_WIDTH - Settings.FLOOR_WIDTH / 2;
         obstacle.visible = true;
       }
     }
@@ -207,7 +224,10 @@ export default class Level {
 
     //shift collectible
     this.collectible.position.z += Settings.MOVE_STEP;
-    if (this.collectible.position.z + this.moverGroup.position.z > Settings.FLOOR_DEPTH / 2) {
+    if (
+      this.collectible.position.z + this.moverGroup.position.z >
+      Settings.FLOOR_DEPTH / 2
+    ) {
       this.collectible.collided = false;
       this.collectible.position.z -= Settings.FLOOR_DEPTH;
       //re-randomize x pos
@@ -235,12 +255,18 @@ export default class Level {
       //right takes precedence
 
       const direction = this.direction * 0.1;
-      this.slideSpeed = Math.max(Math.min(direction * SIDE_ACCEL, MAX_SIDE_SPEED), -MAX_SIDE_SPEED);
+      this.slideSpeed = Math.max(
+        Math.min(direction * SIDE_ACCEL, MAX_SIDE_SPEED),
+        -MAX_SIDE_SPEED,
+      );
 
       //bounce off edges of rails
       const nextx = this.game.camera.position.x + delta * this.slideSpeed;
 
-      if (nextx > Settings.FLOOR_WIDTH / 2 || nextx < -Settings.FLOOR_WIDTH / 2) {
+      if (
+        nextx > Settings.FLOOR_WIDTH / 2 ||
+        nextx < -Settings.FLOOR_WIDTH / 2
+      ) {
         this.slideSpeed = -this.slideSpeed;
         AudioManager.sharedInstance.playAsync('hit');
       }
@@ -314,9 +340,19 @@ export default class Level {
 
     //fade out
 
-    TweenMax.fromTo(this.game.fxParams, 0.3, { brightness: 0 }, { brightness: -1 });
+    TweenMax.fromTo(
+      this.game.fxParams,
+      0.3,
+      { brightness: 0 },
+      { brightness: -1 },
+    );
     TweenMax.delayedCall(0.3, this.resetField);
-    TweenMax.fromTo(this.game.fxParams, 0.3, { brightness: -1 }, { brightness: 0, delay: 0.3 });
+    TweenMax.fromTo(
+      this.game.fxParams,
+      0.3,
+      { brightness: -1 },
+      { brightness: 0, delay: 0.3 },
+    );
     TweenMax.delayedCall(0.6, this.startRun);
   };
 

@@ -1,10 +1,10 @@
 import React from 'react';
 
-import Images from './Images';
+import Assets from '../Assets';
 
 export default [
   {
-    image: Images.backgrounds.beach,
+    image: Assets.images.backgrounds['beach.png'],
     transition: 1000,
     story: [
       {
@@ -17,7 +17,7 @@ export default [
     ],
   },
   {
-    image: Images.backgrounds.dark,
+    image: Assets.images.backgrounds['dark.png'],
     transition: 1000,
     story: [
       {
@@ -26,69 +26,72 @@ export default [
     ],
   },
   {
-    image: Images.backgrounds.xamaronia,
+    image: Assets.images.backgrounds['xamaronia.png'],
     transition: 1000,
     story: [
       {
         animate: true,
-        image: Images.characters.brent,
+        image: Assets.images.characters['brent.png'],
         name: 'Brent',
         dialog: 'Ahh!! How long was I out?? And what is that piercing noise!?',
       },
       {
-        image: Images.characters.xaml,
+        image: Assets.images.characters['xaml.png'],
         name: 'XAML',
-        dialog: 'We are the Xamaronions ⌿BEEP⍀ we have taken over the native environment ⌿ZAP⍀',
+        dialog:
+          'We are the Xamaronions ⌿BEEP⍀ we have taken over the native environment ⌿ZAP⍀',
       },
       {
-        image: Images.characters.nik,
+        image: Assets.images.characters['nik.png'],
         name: 'Nikki',
         dialog: '😖 Bruh wuts wrong with their language?',
       },
       {
-        image: Images.characters.vscodet,
+        image: Assets.images.characters['vscodet.png'],
         name: 'VS Codet',
         dialog:
           'We have been in development for eternity ⌿BUZ⍀ can’t you SEE, SHARP noises are beautiful ⌿CLAK⍀',
       },
       {
-        image: Images.characters.brent,
+        image: Assets.images.characters['vscodet.png'],
         name: 'Brent',
-        dialog: 'AGHGH!1! I can feel the ancient syntax of the Xama-morons trapping my soul',
+        dialog:
+          'AGHGH!1! I can feel the ancient syntax of the Xama-morons trapping my soul',
       },
       {
-        image: Images.characters.nik,
+        image: Assets.images.characters['nik.png'],
         name: 'Nikki',
         dialog: 'Yo stahp, litrally dying bro...',
       },
     ],
   },
   {
-    image: Images.backgrounds.charlie_shadow, // dark corner
+    image: Assets.images.backgrounds['charlie_shadow.png'], // dark corner
     story: [
       {
         name: 'Shadowy Figure',
-        dialog: 'I know how to stop the evil darkness from consuming your spirits!',
+        dialog:
+          'I know how to stop the evil darkness from consuming your spirits!',
       },
     ],
   },
   {
-    image: Images.backgrounds.xamaronia,
+    image: Assets.images.backgrounds['xamaronia.png'],
     story: [
       {
-        image: Images.characters.nik,
+        image: Assets.images.characters['nik.png'],
         name: 'Nikki',
         dialog: '😮 major kekz, wut?',
       },
       {
-        image: Images.characters.brent,
+        image: Assets.images.characters['brent.png'],
         name: 'Brent',
         dialog: 'Can you stop the forces of evil from destroying us!',
       },
     ],
   },
   {
-    image: Images.backgrounds.charlie_full, // full screen charlie
+    image: Assets.images.backgrounds['charlie_full.png'], // full screen charlie
     story: [
       {
         name: 'Charlie!!',
@@ -97,56 +100,57 @@ export default [
     ],
   },
   {
-    image: Images.backgrounds.xamaronia,
+    image: Assets.images.backgrounds['xamaronia.png'],
     story: [
       {
-        image: Images.characters.nik,
+        image: Assets.images.characters['nik.png'],
         name: 'Nikki',
         dialog: '😮😮😮😮😮😮😮😮😮😮😮😮😮😮😮😮',
       },
     ],
   },
   {
-    image: Images.backgrounds.sunset, // sunset background
+    image: Assets.images.backgrounds['sunset.png'], // sunset background
     story: [
       {
-        image: Images.characters.charlie,
+        image: Assets.images.characters['charlie.png'],
         name: 'Charlie',
         dialog: 'We must collect all the exponium we can find!',
       },
     ],
   },
   {
-    image: Images.backgrounds.xamaronia, // xamaromia
+    image: Assets.images.backgrounds['xamaronia.png'], // xamaromia
     story: [
       {
-        image: Images.characters.brent,
+        image: Assets.images.characters['brent.png'],
         name: 'Brent',
         dialog: 'Exponium? What is that',
       },
     ],
   },
   {
-    image: Images.backgrounds.sunset, // sunset background
+    image: Assets.images.backgrounds['sunset.png'], // sunset background
     story: [
       {
-        image: Images.characters.charlie,
+        image: Assets.images.characters['charlie.png'],
         name: 'Charlie',
         dialog:
           'Exponium, or EXPO is a magical substance that translates Objectanium C, into a magnificent harmony',
       },
       {
-        image: Images.characters.charlie,
+        image: Assets.images.characters['charlie.png'],
         name: 'Charlie',
-        dialog: 'Then we can stop the evil mechs from destroying the native world!!!',
+        dialog:
+          'Then we can stop the evil mechs from destroying the native world!!!',
       },
     ],
   },
   {
-    image: Images.backgrounds.xamaronia, // xamaromia
+    image: Assets.images.backgrounds['xamaronia.png'], // xamaromia
     story: [
       {
-        image: Images.characters.nik,
+        image: Assets.images.characters['nik.png'],
         name: 'Nikki',
         // dialog: "Kekz what about that joking annoyance of victims and agony"
         dialog: '🤔 Kekz what about ta trash android one?!1!',
@@ -154,20 +158,20 @@ export default [
     ],
   },
   {
-    image: Images.backgrounds.sunset, // full screen charlie
+    image: Assets.images.backgrounds['sunset.png'], // full screen charlie
     story: [
       {
-        image: Images.characters.charlie, // full screen charlie
+        image: Assets.images.characters['charlie.png'], // full screen charlie
         name: 'Charlie',
         dialog: 'Yes, even JAVA',
       },
     ],
   },
   {
-    image: Images.backgrounds.xamaronia, // xamaromia
+    image: Assets.images.backgrounds['xamaronia.png'], // xamaromia
     story: [
       {
-        image: Images.characters.brent,
+        image: Assets.images.characters['brent.png'],
         name: 'Brent',
         dialog: 'HUUHWHAAAAA..!! Lets go get some EXPO!',
       },

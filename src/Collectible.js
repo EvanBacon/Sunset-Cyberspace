@@ -1,8 +1,8 @@
 import ExpoTHREE, { THREE } from 'expo-three';
 import { TweenMax } from 'gsap';
 
+import Assets from '../Assets';
 import Colors from '../constants/Colors';
-import Models from '../constants/Models';
 import Settings from '../constants/Settings';
 import randomRange from '../utils/randomRange';
 import Node from './Node';
@@ -12,8 +12,14 @@ const zRot = Math.PI / 8;
 class Collectible extends Node {
   collided = false;
   setupAsync = async () => {
-    this.position.x = randomRange(-Settings.FLOOR_WIDTH / 2, Settings.FLOOR_WIDTH / 2);
-    this.position.z = randomRange(-Settings.FLOOR_DEPTH / 2, Settings.FLOOR_DEPTH / 2);
+    this.position.x = randomRange(
+      -Settings.FLOOR_WIDTH / 2,
+      Settings.FLOOR_WIDTH / 2,
+    );
+    this.position.z = randomRange(
+      -Settings.FLOOR_DEPTH / 2,
+      Settings.FLOOR_DEPTH / 2,
+    );
     const collectibleMaterial = new THREE.MeshPhongMaterial({
       color: Colors.item,
       specular: 0x00ffff,
@@ -25,7 +31,7 @@ class Collectible extends Node {
     });
     collectibleMaterial.flatShading = true;
 
-    this.model = await ExpoTHREE.loadAsync(Models.expo);
+    this.model = await ExpoTHREE.loadAsync(Assets.models['expo.obj']);
     ExpoTHREE.utils.scaleLongestSideToSize(this.model, 200);
 
     this.model.traverse(child => {
