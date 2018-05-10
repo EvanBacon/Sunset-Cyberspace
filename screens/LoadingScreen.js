@@ -1,5 +1,5 @@
 import React from 'react';
-import { ImageBackground, Text, StyleSheet } from 'react-native';
+import { ImageBackground, StyleSheet, Text } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 
 import Assets from '../Assets';

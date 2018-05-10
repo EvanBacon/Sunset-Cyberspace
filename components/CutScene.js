@@ -2,31 +2,42 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 
-import CharacterStory from './CharacterStory';
+import CharacterScene from './CharacterScene';
 
-export default class CutScene extends React.Component {
+class CutScene extends React.Component {
   state = {
     finished: false,
   };
+
+  onAnimationEnd = () => {
+    if (this.state.finished) {
+      this.props.onFinish();
+    }
+  };
+
+  get animation() {
+    return this.state.finished ? 'fadeOut' : 'fadeIn';
+  }
+
+  onFinish = () => this.setState({ finished: true });
 
   render() {
     return (
       <Animatable.View
         useNativeDriver
-        onAnimationEnd={_ => {
-          if (this.state.finished) {
-            this.props.onFinish();
-          }
-        }}
-        animation={this.state.finished ? 'fadeOut' : 'fadeIn'}
+        onAnimationEnd={this.onAnimationEnd}
+        animation={this.animation}
         duration={2000}
         style={{
           ...StyleSheet.absoluteFillObject,
           backgroundColor: 'black',
           padding: 0,
-        }}>
-        <CharacterStory onFinish={() => this.setState({ finished: true })} data={this.props.data} />
+        }}
+      >
+        <CharacterScene onFinish={this.onFinish} data={this.props.data} />
       </Animatable.View>
     );
   }
 }
+
+export default CutScene;

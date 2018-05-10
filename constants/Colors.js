@@ -10,4 +10,6 @@ export default {
   backgroundColor: 0x1f0729,
   fog: 0x1f0729,
   bar: 0x0ff66ff,
+  flat: '#212557',
+  border: '#3B429C',
 };

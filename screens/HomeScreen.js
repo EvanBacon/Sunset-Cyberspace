@@ -2,8 +2,8 @@ import React from 'react';
 import { StatusBar, StyleSheet, View } from 'react-native';
 
 import AudioManager from '../AudioManager';
+import CutScene from '../components/CutScene';
 import Story from '../constants/Story';
-import CutScene from './CutScene';
 import GameScreen from './GameScreen';
 import LoadingScreen from './LoadingScreen';
 import MenuScreen from './MenuScreen';
@@ -56,14 +56,19 @@ export default class HomeScreen extends React.Component {
 
         <GameScreen
           onGameLoaded={() => this.setState({ gameLoaded: true })}
-          updateScore={(score, highScore) => this.setState({ score, highScore })}
+          updateScore={(score, highScore) =>
+            this.setState({ score, highScore })
+          }
           onPlay={onPlay}
         />
 
         {this._renderUI(!gameLoaded)}
 
         {this.state.cutScene && (
-          <CutScene onFinish={() => this.setState({ cutScene: null })} data={this.state.cutScene} />
+          <CutScene
+            onFinish={() => this.setState({ cutScene: null })}
+            data={this.state.cutScene}
+          />
         )}
       </View>
     );

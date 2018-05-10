@@ -6,15 +6,12 @@ import Assets from '../Assets';
 import Colors from '../constants/Colors';
 import Settings from '../constants/Settings';
 import Background from './Background';
+import randomRange from '../utils/randomRange';
 
 const isIPhone = Platform.OS === 'ios';
 
 const PARTICLES_COUNT = isIPhone ? 400 : 200;
-const PARTICLES_EDGE = 100;
-const PARTICLES_TOP = 1600;
-const PARTICLES_BOTTOM = -300;
 const BAR_COUNT = isIPhone ? 20 : 10;
-const randomRange = (min, max) => min + Math.random() * (max - min);
 
 export default class Particles {
   windDir = 0;
@@ -42,7 +39,7 @@ export default class Particles {
       this.particlesGeometry.vertices.push(
         new THREE.Vector3(
           randomRange(-Settings.FLOOR_WIDTH / 2, Settings.FLOOR_WIDTH / 2),
-          randomRange(PARTICLES_BOTTOM, PARTICLES_TOP),
+          randomRange(Settings.PARTICLES_BOTTOM, Settings.PARTICLES_TOP),
           randomRange(-Settings.FLOOR_DEPTH / 2, Settings.FLOOR_DEPTH / 2),
         ),
       );
@@ -145,8 +142,8 @@ export default class Particles {
       vert.y -= 3;
 
       //bounds wrapping
-      if (vert.y < PARTICLES_BOTTOM) {
-        vert.y = PARTICLES_TOP;
+      if (vert.y < Settings.PARTICLES_BOTTOM) {
+        vert.y = Settings.PARTICLES_TOP;
       }
 
       //only do fancy wind if not playing
@@ -155,16 +152,16 @@ export default class Particles {
         vert.z += Math.sin(this.windDir) * this.windStrength;
 
         //wrap around edges
-        if (vert.x > Settings.FLOOR_WIDTH / 2 + PARTICLES_EDGE)
-          vert.x = -Settings.FLOOR_WIDTH / 2 + PARTICLES_EDGE;
-        if (vert.x < -Settings.FLOOR_WIDTH / 2 + PARTICLES_EDGE)
-          vert.x = Settings.FLOOR_WIDTH / 2 + PARTICLES_EDGE;
+        if (vert.x > Settings.FLOOR_WIDTH / 2 + Settings.PARTICLES_EDGE)
+          vert.x = -Settings.FLOOR_WIDTH / 2 + Settings.PARTICLES_EDGE;
+        if (vert.x < -Settings.FLOOR_WIDTH / 2 + Settings.PARTICLES_EDGE)
+          vert.x = Settings.FLOOR_WIDTH / 2 + Settings.PARTICLES_EDGE;
 
-        if (vert.z > Settings.FLOOR_DEPTH / 2 + PARTICLES_EDGE) {
-          vert.z = -Settings.FLOOR_DEPTH / 2 + PARTICLES_EDGE;
+        if (vert.z > Settings.FLOOR_DEPTH / 2 + Settings.PARTICLES_EDGE) {
+          vert.z = -Settings.FLOOR_DEPTH / 2 + Settings.PARTICLES_EDGE;
         }
-        if (vert.z < -Settings.FLOOR_DEPTH / 2 + PARTICLES_EDGE) {
-          vert.z = Settings.FLOOR_DEPTH / 2 + PARTICLES_EDGE;
+        if (vert.z < -Settings.FLOOR_DEPTH / 2 + Settings.PARTICLES_EDGE) {
+          vert.z = Settings.FLOOR_DEPTH / 2 + Settings.PARTICLES_EDGE;
         }
       }
     }

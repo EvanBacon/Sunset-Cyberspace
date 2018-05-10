@@ -1,11 +1,12 @@
 import Expo from 'expo';
 import AssetUtils from 'expo-asset-utils';
 import React from 'react';
-import { View } from 'react-native';
+
 import Assets from '../Assets';
-import LoadingScreen from './LoadingScreen';
 import AudioManager from '../AudioManager';
-import HomeScreen from './HomeScreen';
+import HomeScreen from '../screens/HomeScreen';
+import LoadingScreen from '../screens/LoadingScreen';
+
 class Preload extends React.Component {
   state = {
     loading: true,
