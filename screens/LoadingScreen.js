@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
   },
   loadingText: {
     fontSize: 64,
-    fontFamily: 'Retro-Regular',
+    // fontFamily: 'Retro-Regular',
     color: 'white',
     textAlign: 'center',
   },

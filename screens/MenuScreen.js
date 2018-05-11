@@ -90,6 +90,24 @@ class MenuScreen extends React.Component {
             }}
           />
         </Animatable.View>
+
+        <Animatable.View
+          style={{
+            zIndex: 2,
+            position: 'absolute',
+            bottom: 8,
+            left: 8,
+            width: 164,
+          }}
+          animation={playing ? 'bounceOut' : 'pulse'}
+          easing="ease-out"
+          iterationCount={playing ? 1 : 'infinite'}
+        >
+          <Button
+            title="LICENSES"
+            onPress={() => this.props.navigation.navigate('Licenses')}
+          />
+        </Animatable.View>
       </View>
     );
   }

@@ -16,7 +16,7 @@
       "backgroundColor": "#000000"
     },
     "packagerOpts": {
-      "assetExts": ["ttf", "mp4", "obj", "jpg", "txt", "json"]
+      "assetExts": ["ttf", "mp4", "obj", "jpg", "txt"]
     },
     "ios": {
       "appStoreUrl":

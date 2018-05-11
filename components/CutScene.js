@@ -3,15 +3,19 @@ import { StyleSheet } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 
 import CharacterScene from './CharacterScene';
+import Story from '../constants/Story';
 
 class CutScene extends React.Component {
+  static defaultProps = {
+    data: Story,
+  };
   state = {
     finished: false,
   };
 
   onAnimationEnd = () => {
     if (this.state.finished) {
-      this.props.onFinish();
+      this.props.navigation.goBack();
     }
   };
 

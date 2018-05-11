@@ -2,7 +2,7 @@ import '@expo/browser-polyfill';
 
 import { THREE } from 'expo-three';
 import React from 'react';
-
+import { StatusBar, View } from 'react-native';
 import Preload from './components/Preload';
 
 /* 
@@ -21,7 +21,12 @@ class App extends React.Component {
   }
 
   render() {
-    return <Preload />;
+    return (
+      <View style={{ flex: 1 }}>
+        <StatusBar hidden />
+        <Preload />
+      </View>
+    );
   }
 }
 

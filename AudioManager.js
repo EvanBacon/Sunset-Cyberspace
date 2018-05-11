@@ -7,7 +7,7 @@ class AudioManager {
   sounds = {};
 
   playAsync = async (name, isLooping) => {
-    if (this.sounds.hasOwnProperty(name)) {
+    if (name in this.sounds) {
       const soundObject = this.sounds[name];
       try {
         await soundObject.setPositionAsync(0);
@@ -20,8 +20,9 @@ class AudioManager {
       console.warn("Audio doesn't exist", name);
     }
   };
+
   stopAsync = async name => {
-    if (this.sounds.hasOwnProperty(name)) {
+    if (name in this.sounds) {
       const soundObject = this.sounds[name];
       try {
         // await soundObject.setPositionAsync(0);
@@ -47,7 +48,9 @@ class AudioManager {
     const keys = Object.keys(Assets.audio);
     for (let key of keys) {
       const item = Assets.audio[key];
-      this.sounds[key] = (await Expo.Audio.Sound.create(item)).sound;
+      this.sounds[key.split('.')[0]] = (await Expo.Audio.Sound.create(
+        item,
+      )).sound;
     }
   };
 

@@ -30,9 +30,10 @@ export default class HomeScreen extends React.Component {
       <LoadingScreen />
     ) : (
       <MenuScreen
+        navigation={this.props.navigation}
         score={this.state.score}
         playing={this.state.playing}
-        onStory={() => this.setState({ cutScene: Story })}
+        onStory={() => this.props.navigation.navigate('Story')}
       />
     );
   };
@@ -52,8 +53,6 @@ export default class HomeScreen extends React.Component {
 
     return (
       <View style={styles.container}>
-        <StatusBar hidden />
-
         <GameScreen
           onGameLoaded={() => this.setState({ gameLoaded: true })}
           updateScore={(score, highScore) =>
@@ -63,13 +62,6 @@ export default class HomeScreen extends React.Component {
         />
 
         {this._renderUI(!gameLoaded)}
-
-        {this.state.cutScene && (
-          <CutScene
-            onFinish={() => this.setState({ cutScene: null })}
-            data={this.state.cutScene}
-          />
-        )}
       </View>
     );
   }

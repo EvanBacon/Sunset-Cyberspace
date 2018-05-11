@@ -6,6 +6,7 @@ import Assets from '../Assets';
 import AudioManager from '../AudioManager';
 import HomeScreen from '../screens/HomeScreen';
 import LoadingScreen from '../screens/LoadingScreen';
+import Navigator from '../navigation/AppNavigator';
 
 class Preload extends React.Component {
   state = {
@@ -54,7 +55,7 @@ class Preload extends React.Component {
   }
 
   get screen() {
-    return <HomeScreen />;
+    return <Navigator />;
   }
 
   render() {

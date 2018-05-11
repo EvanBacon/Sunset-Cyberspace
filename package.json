@@ -17,6 +17,7 @@
     "react-native": "https://github.com/expo/react-native/archive/sdk-27.0.0.tar.gz",
     "react-native-animatable": "^1.2.4",
     "react-native-typewriter": "^0.5.3",
+    "react-navigation": "^2.0.1",
     "three": "^0.92.0",
     "tween.js": "^16.6.0"
   },
