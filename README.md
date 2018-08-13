@@ -12,7 +12,7 @@ Demo: https://expo.io/@bacon/cyberspace
 
 ### Download on iOS
 
-All you lovely iOS users can download on the [App Store](https://itunes.apple.com/us/app/sunset-cyberspace/id1332439319?ls=1&mt=8)
+All you iOS users can download on the [App Store](https://itunes.apple.com/us/app/sunset-cyberspace/id1332439319?ls=1&mt=8)
 
 ### Download on Android
 
