@@ -1,6 +1,8 @@
 # Expo Sunset Cyberspace
 
 ### Retrowave Game made in Expo, Three.js, OpenGL, WebGL, Tween.
+[![Twitter](https://img.shields.io/badge/twitter-@baconbrix-55acee.svg?maxAge=2592000)](http://twitter.com/baconbrix)
+[![Code Pen](https://img.shields.io/badge/CodePen-EvanBacon-000000.svg?maxAge=2592000)](http://codepen.io/EvanBacon/)
 
 Demo: https://expo.io/@bacon/cyberspace
 
@@ -27,6 +29,3 @@ Everyone else can go to the [Play Store](https://play.google.com/store/apps/deta
 ----
 
 **Because this game uses Three.js you will only be able to run it on a physical device! No Simulators** 😐
-
-### Tutorial
-#### Coming Soon! :)
