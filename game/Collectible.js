@@ -1,4 +1,4 @@
-import ExpoTHREE, { THREE } from 'expo-three';
+import ExpoTHREE, { THREE, utils } from '../expo-three';
 import { TweenMax } from 'gsap';
 
 import Assets from '../Assets';
@@ -32,7 +32,7 @@ class Collectible extends Node {
     collectibleMaterial.flatShading = true;
 
     this.model = await ExpoTHREE.loadAsync(Assets.models['expo.obj']);
-    ExpoTHREE.utils.scaleLongestSideToSize(this.model, 200);
+    utils.scaleLongestSideToSize(this.model, 200);
 
     this.model.traverse(child => {
       if (child instanceof THREE.Mesh) {
@@ -43,14 +43,14 @@ class Collectible extends Node {
 
     this.add(new THREE.PointLight(0x2188ff, 1.2, 900));
 
-    this.runCoolAnimation();
+    this.startAnimating();
   };
 
-  runCoolAnimation = () => {
+  startAnimating = () => {
     TweenMax.to(this.rotation, 0.3, {
       y: this.rotation.y + Math.PI,
       delay: 1.3,
-      onComplete: this.runCoolAnimation,
+      onComplete: this.startAnimating,
     });
   };
 

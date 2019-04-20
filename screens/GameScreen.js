@@ -1,5 +1,5 @@
-import ExpoGraphics from 'expo-graphics';
-import ExpoTHREE, { THREE } from 'expo-three';
+import { GraphicsView } from 'expo-graphics';
+import ExpoTHREE, { THREE } from '../expo-three';
 import React from 'react';
 
 import TouchableView from '../components/TouchableView';
@@ -20,7 +20,7 @@ class GameScreen extends React.Component {
       onTouchesMoved={event => this.game.onTouchesMoved(event)}
       onTouchesEnded={event => this.game.onTouchesEnded(event)}
     >
-      <ExpoGraphics.View
+      <GraphicsView
         style={{ flex: 1 }}
         onContextCreate={this.onContextCreate}
         onRender={this.onRender}
@@ -29,26 +29,27 @@ class GameScreen extends React.Component {
     </TouchableView>
   );
 
-  onContextCreate = async ({ gl, width, height, scale }) => {
-    // global.supportsEffects = gl.createRenderbuffer != null;
+  onContextCreate = async ({ gl, width, height, scale, pixelRatio }) => {
+    global.supportsEffects = gl.createRenderbuffer != null;
 
-    // gl.createRenderbuffer = gl.createRenderbuffer || (() => ({}));
-    // gl.bindRenderbuffer = gl.bindRenderbuffer || (() => ({}));
-    // gl.renderbufferStorage = gl.renderbufferStorage || (() => ({}));
-    // gl.framebufferRenderbuffer = gl.framebufferRenderbuffer || (() => ({}));
+    gl.createRenderbuffer = gl.createRenderbuffer || (() => ({}));
+    gl.bindRenderbuffer = gl.bindRenderbuffer || (() => ({}));
+    gl.renderbufferStorage = gl.renderbufferStorage || (() => ({}));
+    gl.framebufferRenderbuffer = gl.framebufferRenderbuffer || (() => ({}));
 
     const crazy = false;
 
     // renderer
-    this.renderer = ExpoTHREE.renderer({
+    this.renderer = new ExpoTHREE.Renderer({
+      width,
+      height,
       gl,
-      // precision: crazy ? 'highp' : 'mediump',
+      pixelRatio,
+      precision: 'highp',
       antialias: false, //crazy ? true : false,
       stencil: false,
       maxLights: crazy ? 4 : 2,
     });
-    this.renderer.setPixelRatio(scale);
-    this.renderer.setSize(width, height);
     this.renderer.setClearColor(Colors.dark);
 
     // scene

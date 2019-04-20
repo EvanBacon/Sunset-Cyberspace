@@ -1,13 +1,12 @@
-import ExpoTHREE, { THREE } from 'expo-three';
-
+import ExpoTHREE, { THREE } from '../expo-three';
 import Assets from '../Assets';
 import Node from './Node';
 
 class Background extends Node {
   setupAsync = async () => {
-    //SKY
+    const map = await ExpoTHREE.loadAsync(Assets.images['sky.png']);
     this.material = new THREE.MeshBasicMaterial({
-      map: await ExpoTHREE.loadAsync(Assets.images['sky.png']),
+      map,
       transparent: true,
       depthTest: true,
       fog: false,

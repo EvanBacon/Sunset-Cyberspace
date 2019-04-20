@@ -1,21 +1,47 @@
-import { Constants } from 'expo';
-import React, { Component } from 'react';
+import React from 'react';
 import { StyleSheet } from 'react-native';
+import * as Animatable from 'react-native-animatable';
 
-import CutScene from '../components/CutScene';
+import Story from '../constants/Story';
+import CharacterScene from '../components/CharacterScene';
 
-class StoryScreen extends Component {
+class StoryScreen extends React.Component {
+  static defaultProps = {
+    data: Story,
+  };
+  state = {
+    finished: false,
+  };
+
+  onAnimationEnd = () => {
+    if (this.state.finished) {
+      this.props.navigation.goBack();
+    }
+  };
+
+  get animation() {
+    return this.state.finished ? 'fadeOut' : 'fadeIn';
+  }
+
+  onFinish = () => this.setState({ finished: true });
+
   render() {
-    return <CutScene navigation={this.props.navigation} />;
+    return (
+      <Animatable.View
+        useNativeDriver
+        onAnimationEnd={this.onAnimationEnd}
+        animation={this.animation}
+        duration={2000}
+        style={{
+          ...StyleSheet.absoluteFillObject,
+          backgroundColor: 'black',
+          padding: 0,
+        }}
+      >
+        <CharacterScene onFinish={this.onFinish} data={this.props.data} />
+      </Animatable.View>
+    );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'black',
-    paddingTop: Constants.statusBarHeight,
-  },
-});
 
 export default StoryScreen;

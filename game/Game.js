@@ -1,6 +1,6 @@
-import { THREE } from 'expo-three';
+import ExpoTHREE, { THREE } from '../expo-three';
 import { TweenMax } from 'gsap';
-import { Dimensions, Platform } from 'react-native';
+import { Platform } from 'react-native';
 
 import AudioManager from '../AudioManager';
 import Colors from '../constants/Colors';
@@ -78,7 +78,7 @@ export default class Game {
     this.superPass.uniforms.hueAmount.value = hueAmount;
 
     this.hueTime += speed * speed * 0.05;
-    const hue = this.hueTime % 2 - 1; //put in range -1 to 1
+    const hue = (this.hueTime % 2) - 1; //put in range -1 to 1
     this.superPass.uniforms.hue.value = hue;
     this.superPass.uniforms.brightness.value = this.fxParams.brightness;
 

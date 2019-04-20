@@ -1,14 +1,12 @@
 import React from 'react';
-import { StatusBar, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
 import AudioManager from '../AudioManager';
-import CutScene from '../components/CutScene';
-import Story from '../constants/Story';
 import GameScreen from './GameScreen';
 import LoadingScreen from './LoadingScreen';
 import MenuScreen from './MenuScreen';
 
-export default class HomeScreen extends React.Component {
+class HomeScreen extends React.Component {
   state = {
     playing: false,
     score: 0,
@@ -66,6 +64,8 @@ export default class HomeScreen extends React.Component {
     );
   }
 }
+
+export default HomeScreen;
 
 const styles = StyleSheet.create({
   container: {

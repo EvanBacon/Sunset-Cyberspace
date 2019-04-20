@@ -1,12 +1,12 @@
-import ExpoTHREE, { THREE } from 'expo-three';
+import ExpoTHREE, { THREE } from '../expo-three';
 import ImprovedNoise from 'improved-noise';
 import { Platform } from 'react-native';
 
 import Assets from '../Assets';
 import Colors from '../constants/Colors';
 import Settings from '../constants/Settings';
-import Background from './Background';
 import randomRange from '../utils/randomRange';
+import Background from './Background';
 
 const isIPhone = Platform.OS === 'ios';
 
@@ -133,7 +133,9 @@ export default class Particles {
     this.particlesTime += 0.001;
     this.windStrength = this.snoise.noise(this.particlesTime, 0, 0) * 20;
     this.windDir =
-      (this.snoise.noise(this.particlesTime + 100, 0, 0) + 1) / 2 * Math.PI * 2;
+      ((this.snoise.noise(this.particlesTime + 100, 0, 0) + 1) / 2) *
+      Math.PI *
+      2;
 
     for (let i = 0; i < PARTICLES_COUNT; i++) {
       let vert = this.particlesGeometry.vertices[i];
@@ -170,7 +172,7 @@ export default class Particles {
 
     let opac = (this.level.getSpeed() - 0.5) * 2;
 
-    this.barMaterial.opacity = opac * 2 / 3;
+    this.barMaterial.opacity = (opac * 2) / 3;
     this.background.material.opacity = opac + 0.1;
 
     for (let i = 0; i < this.bars.length; i++) {

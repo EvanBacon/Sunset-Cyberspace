@@ -1,4 +1,4 @@
-import { THREE } from 'expo-three';
+import ExpoTHREE, { THREE } from '../expo-three';
 
 import Colors from '../constants/Colors';
 import Settings from '../constants/Settings';

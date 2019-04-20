@@ -11,8 +11,6 @@ import * as Animatable from 'react-native-animatable';
 import DialogBox from './DialogBox';
 import NameTag from './NameTag';
 
-const isIphone = Platform.OS === 'ios';
-
 class CharacterDialog extends React.Component {
   static propTypes = {
     onFinish: PropTypes.func.isRequired,
@@ -40,6 +38,7 @@ class CharacterDialog extends React.Component {
             />
           )}
           <Animatable.View
+            style={{ justifyContent: 'flex-start' }}
             animation={'fadeInLeftBig'}
             useNativeDriver
             duration={animate ? 1500 : 1}
@@ -51,14 +50,7 @@ class CharacterDialog extends React.Component {
               animation={'zoomIn'}
               duration={animate ? 1000 : 1}
               delay={animate ? 2000 : 1}
-              style={{
-                zIndex: 1,
-                position: 'absolute',
-                left: 24,
-                top: isIphone ? -12 : 0,
-                paddingTop: isIphone ? 0 : 8,
-                right: 0,
-              }}
+              style={styles.zoombox}
             >
               {name && <NameTag>{name}</NameTag>}
             </Animatable.View>
@@ -82,6 +74,8 @@ class CharacterDialog extends React.Component {
 
 export default CharacterDialog;
 
+const isIphone = Platform.OS === 'ios';
+
 const styles = StyleSheet.create({
   touchable: {
     position: 'absolute',
@@ -98,5 +92,13 @@ const styles = StyleSheet.create({
     height: 192,
     aspectRatio: 1,
     resizeMode: 'contain',
+  },
+  zoombox: {
+    zIndex: 1,
+    position: 'absolute',
+    left: 24,
+    top: isIphone ? -12 : 0,
+    paddingTop: isIphone ? 0 : 8,
+    right: 0,
   },
 });

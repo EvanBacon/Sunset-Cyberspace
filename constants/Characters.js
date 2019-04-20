@@ -1,24 +1,26 @@
 import Assets from '../Assets';
 
+const { characters } = Assets.images;
+
 export default {
   brent: {
     name: 'Brent',
-    image: Assets.images.characters['brent.png'],
+    image: characters['brent.png'],
   },
   nikki: {
-    image: Assets.images.characters['nik.png'],
+    image: characters['nik.png'],
     name: 'Nikki',
   },
   charlie: {
-    image: Assets.images.characters['charlie.png'],
+    image: characters['charlie.png'],
     name: 'Charlie',
   },
   xaml: {
-    image: Assets.images.characters['xaml.png'],
+    image: characters['xaml.png'],
     name: 'XAML',
   },
   vscodet: {
-    image: Assets.images.characters['vscodet.png'],
+    image: characters['vscodet.png'],
     name: 'VS Codet',
   },
 };

@@ -31,7 +31,11 @@ class TouchableView extends React.Component {
   render() {
     const { children, id, style, ...props } = this.props;
     return (
-      <View {...props} style={[{ flex: 1 }, style]} {...this._panResponder.panHandlers}>
+      <View
+        {...props}
+        style={[{ flex: 1 }, style]}
+        {...this._panResponder.panHandlers}
+      >
         {children}
       </View>
     );

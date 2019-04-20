@@ -1,31 +1,32 @@
-/*
+/**
+ * ```js
+ * import { Constants } from 'expo';
+ * import React, { Component } from 'react';
+ * import { StyleSheet, View } from 'react-native';
+ * import * as Animatable from 'react-native-animatable';
+ * import Button from '../components/Button';
+ * import Licenses from '../components/Licenses';
+ * import Data from '../licenses';
+ * ```
+ * Ok, so if you want to make a license page, download this lib: https://www.npmjs.com/package/npm-license-crawler
+ * I did it globally: `npm i npm-license-crawler -g`
+ * **There are two main styles**
+ *
+ * - **Overwhelmingly long to avoid really crediting people: (not judging, you do you)**
+ *  `npm-license-crawler --dependencies --json licenses.json`
+ * - **And a concise clean list of direct packages:**
+ *  `npm-license-crawler --onlyDirectDependencies --json licenses.json`
+ *
+ * Then use something like this library to display that json! :D
+ */
 
-Ok, so if you want to make a license page, download this lib: https://www.npmjs.com/package/npm-license-crawler
-
-I did it globally: `npm i npm-license-crawler -g`
-
-## There are two main styles
-
-### Overwhelmingly long to avoid really crediting people: (not judging, you do you) 
-npm-license-crawler --dependencies --json licenses.json
-
-### And a concise clean list of direct packages:
-npm-license-crawler --onlyDirectDependencies --json licenses.json
-
-Then use something like this library to display that json! :D
-
-
-*/
-
-import React, { Component } from 'react';
-import { Text, View, StyleSheet } from 'react-native';
 import { Constants } from 'expo';
-
-import Licenses from '../components/Licenses';
-
-import Data from '../licenses';
-import Button from '../components/Button';
+import React, { Component } from 'react';
+import { StyleSheet, View } from 'react-native';
 import * as Animatable from 'react-native-animatable';
+import Button from '../components/Button';
+import Licenses from '../components/Licenses';
+import Data from '../licenses';
 
 function extractNameFromGithubUrl(url) {
   if (!url) {
@@ -52,7 +53,7 @@ function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-let licenses = Object.keys(Data).map(key => {
+const licenses = Object.keys(Data).map(key => {
   let { licenses, ...license } = Data[key];
   let [name, version] = key.split('@');
 
@@ -75,6 +76,7 @@ let licenses = Object.keys(Data).map(key => {
     image,
     userUrl,
     username,
+    /// Use only the first 406...
     licenses: licenses.slice(0, 405),
     version,
     ...license,
@@ -92,16 +94,10 @@ class LicensesScreen extends Component {
       <View style={styles.container}>
         <Licenses licenses={licenses} />
         <Animatable.View
-          style={{
-            zIndex: 2,
-            position: 'absolute',
-            bottom: 8,
-            left: 8,
-            width: 128,
-          }}
-          animation={'pulse'}
+          style={styles.animatableIView}
+          animation="pulse"
           easing="ease-out"
-          iterationCount={'infinite'}
+          iterationCount="infinite"
         >
           <Button title="BACK" onPress={this.onPress} />
         </Animatable.View>
@@ -110,12 +106,19 @@ class LicensesScreen extends Component {
   }
 }
 
+export default LicensesScreen;
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'black',
     paddingTop: Constants.statusBarHeight,
   },
+  animatableIView: {
+    zIndex: 2,
+    position: 'absolute',
+    bottom: 8,
+    left: 8,
+    width: 128,
+  },
 });
-
-export default LicensesScreen;

@@ -1,4 +1,4 @@
-import ExpoTHREE, { THREE } from 'expo-three';
+import ExpoTHREE, { THREE } from '../expo-three';
 import { TweenMax } from 'gsap';
 import ImprovedNoise from 'improved-noise';
 
@@ -118,7 +118,7 @@ export default class Level {
       this.moverGroup.add(obstacle);
       obstacle.position.x = Settings.FLOOR_WIDTH / 2 + 300;
       obstacle.position.z =
-        Settings.FLOOR_DEPTH * i / EDGE_OBSTACLE_COUNT -
+        (Settings.FLOOR_DEPTH * i) / EDGE_OBSTACLE_COUNT -
         Settings.FLOOR_DEPTH / 2;
     }
 
@@ -129,7 +129,7 @@ export default class Level {
       this.moverGroup.add(obstacle);
       obstacle.position.x = -(Settings.FLOOR_WIDTH / 2 + 300);
       obstacle.position.z =
-        Settings.FLOOR_DEPTH * i / EDGE_OBSTACLE_COUNT -
+        (Settings.FLOOR_DEPTH * i) / EDGE_OBSTACLE_COUNT -
         Settings.FLOOR_DEPTH / 2;
     }
 
@@ -184,7 +184,8 @@ export default class Level {
     //calculate vert psons base on noise
     let ipos;
     const offset =
-      this.stepCount * Settings.MOVE_STEP / Settings.FLOOR_DEPTH * FLOOR_RES;
+      ((this.stepCount * Settings.MOVE_STEP) / Settings.FLOOR_DEPTH) *
+      FLOOR_RES;
 
     for (let i = 0; i < FLOOR_RES + 1; i++) {
       for (let j = 0; j < FLOOR_RES + 1; j++) {
@@ -192,8 +193,8 @@ export default class Level {
         const cur = i * (FLOOR_RES + 1) + j;
         this.floorGeometry.vertices[cur].z =
           this.snoise.noise(
-            ipos / FLOOR_RES * this.noiseScale,
-            j / FLOOR_RES * this.noiseScale,
+            (ipos / FLOOR_RES) * this.noiseScale,
+            (j / FLOOR_RES) * this.noiseScale,
             this.noiseSeed,
           ) * FLOOR_THICKNESS;
       }
@@ -211,7 +212,7 @@ export default class Level {
       ) {
         obstacle.collided = false;
         obstacle.position.z -= Settings.FLOOR_DEPTH;
-        ipos = obstacle.posi + offset / FLOOR_RES * Settings.FLOOR_DEPTH;
+        ipos = obstacle.posi + (offset / FLOOR_RES) * Settings.FLOOR_DEPTH;
         //re-randomize x pos
         obstacle.posj = Math.random();
         obstacle.position.x =
@@ -232,7 +233,7 @@ export default class Level {
       this.collectible.position.z -= Settings.FLOOR_DEPTH;
       //re-randomize x pos
       this.collectible.posj = Math.random();
-      const xRange = Settings.FLOOR_WIDTH / 2 * 0.7;
+      const xRange = (Settings.FLOOR_WIDTH / 2) * 0.7;
       this.collectible.position.x = randomRange(-xRange, xRange);
     }
   };

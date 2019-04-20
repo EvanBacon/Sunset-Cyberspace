@@ -1,18 +1,16 @@
 import React from 'react';
 import { ImageBackground, StyleSheet, Text } from 'react-native';
-import * as Animatable from 'react-native-animatable';
+import { createAnimatableComponent } from 'react-native-animatable';
 
 import Assets from '../Assets';
 
-const AnimatableImageBackground = Animatable.createAnimatableComponent(
-  ImageBackground,
-);
+const AnimatableImageBackground = createAnimatableComponent(ImageBackground);
 
 const LoadingScreen = () => (
   <AnimatableImageBackground
     pointerEvents="none"
     useNativeDriver
-    animation={'fadeIn'}
+    animation="fadeIn"
     style={styles.loadingImage}
     source={Assets.images['loading.gif']}
   >

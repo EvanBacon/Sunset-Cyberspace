@@ -1,13 +1,13 @@
+import { FontAwesome } from '@expo/vector-icons';
 import React, { Component } from 'react';
 import {
+  Image,
+  Linking,
+  StyleSheet,
   Text,
   TouchableOpacity,
   View,
-  Linking,
-  Image,
-  StyleSheet,
 } from 'react-native';
-import { FontAwesome } from '@expo/vector-icons'; // Version can be specified in package.json
 
 export default class LicensesListItem extends Component {
   render() {
