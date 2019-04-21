@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
   },
   animatedImage: {
     height: 192,
-    aspectRatio: 1,
+    width: 192,
     resizeMode: 'contain',
   },
   zoombox: {

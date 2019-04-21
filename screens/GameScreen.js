@@ -5,6 +5,8 @@ import React from 'react';
 import TouchableView from '../components/TouchableView';
 import Colors from '../constants/Colors';
 import Game from '../game/Game';
+import DisableBodyScrollingView from '../components/DisableBodyScrollingView';
+import KeyboardControlsView from '../components/KeyboardControlsView';
 
 require('three/examples/js/shaders/FXAAShader');
 
@@ -13,20 +15,38 @@ class GameScreen extends React.Component {
   game = {};
 
   render = () => (
-    <TouchableView
-      id="game"
-      shouldCancelWhenOutside={false}
-      onTouchesBegan={event => this.game.onTouchesBegan(event)}
-      onTouchesMoved={event => this.game.onTouchesMoved(event)}
-      onTouchesEnded={event => this.game.onTouchesEnded(event)}
-    >
-      <GraphicsView
-        style={{ flex: 1 }}
-        onContextCreate={this.onContextCreate}
-        onRender={this.onRender}
-        onResize={this.onResize}
-      />
-    </TouchableView>
+    <DisableBodyScrollingView>
+      <KeyboardControlsView
+        onDown={({ code }) => {
+          console.log('press', code);
+          if (this.game) {
+            if (code === 'ArrowRight' || code === 'KeyD') {
+              this.game.onRight();
+            } else if (code === 'ArrowLeft' || code === 'KeyA') {
+              this.game.onLeft();
+            }
+          }
+        }}
+        onUp={e => {
+          if (this.game) this.game.onKeyUp(e);
+        }}
+      >
+        <TouchableView
+          id="game"
+          shouldCancelWhenOutside={false}
+          onTouchesBegan={event => this.game.onTouchesBegan(event)}
+          onTouchesMoved={event => this.game.onTouchesMoved(event)}
+          onTouchesEnded={event => this.game.onTouchesEnded(event)}
+        >
+          <GraphicsView
+            style={{ flex: 1 }}
+            onContextCreate={this.onContextCreate}
+            onRender={this.onRender}
+            onResize={this.onResize}
+          />
+        </TouchableView>
+      </KeyboardControlsView>
+    </DisableBodyScrollingView>
   );
 
   onContextCreate = async ({ gl, width, height, scale, pixelRatio }) => {

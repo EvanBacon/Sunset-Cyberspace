@@ -52,6 +52,7 @@ class HomeScreen extends React.Component {
     return (
       <View style={styles.container}>
         <GameScreen
+          ref={ref => (this.gameView = ref)}
           onGameLoaded={() => this.setState({ gameLoaded: true })}
           updateScore={(score, highScore) =>
             this.setState({ score, highScore })

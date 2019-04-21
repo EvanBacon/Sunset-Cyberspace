@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
     color: 'white',
   },
   image: {
-    aspectRatio: 1,
+    height: 96,
     width: 96,
     borderRadius: 0,
   },

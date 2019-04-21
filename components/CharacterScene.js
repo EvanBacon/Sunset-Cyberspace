@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Image, StyleSheet } from 'react-native';
-import * as Animatable from 'react-native-animatable';
+import { View } from 'react-native-animatable';
 
 import CharacterStory from './CharacterStory';
 
@@ -19,7 +19,7 @@ class CharacterScene extends React.Component {
     const { image, story, transition } = data[index];
 
     return (
-      <Animatable.View
+      <View
         useNativeDriver
         onAnimationEnd={() => {
           if (this.state.finished) {
@@ -30,9 +30,7 @@ class CharacterScene extends React.Component {
         }}
         animation={this.state.finished ? 'fadeOut' : 'fadeIn'}
         duration={transition || 200}
-        style={{
-          ...StyleSheet.absoluteFillObject,
-        }}
+        style={StyleSheet.absoluteFill}
       >
         <Image
           resizeMode="cover"
@@ -50,7 +48,7 @@ class CharacterScene extends React.Component {
           }}
           data={story}
         />
-      </Animatable.View>
+      </View>
     );
   }
 }

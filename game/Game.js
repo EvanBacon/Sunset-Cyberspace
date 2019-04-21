@@ -129,11 +129,31 @@ export default class Game {
     this.isFirstGame = false;
   }
 
+  _onKeyPressed = () => {
+    if (!this.level.playing && this.level.acceptInput) {
+      this.onGameStart();
+    }
+  };
+
+  keyboardMult = 2;
+
+  onLeft = () => {
+    this.level.direction = -this.minMoveSpeed * this.keyboardMult;
+  };
+
+  onRight = () => {
+    this.level.direction = this.minMoveSpeed * this.keyboardMult;
+  };
+
+  onKeyUp = () => {
+    this._onKeyPressed();
+    this.level.direction = 0;
+  };
+
   onTouchesBegan = ({ touches, gestureState: { dx } }) => {
     if (!this.level.playing && this.level.acceptInput) {
       this.onGameStart();
     }
-
     for (let i = 0; i < touches.length; i++) {
       const xpos = touches[i].pageX;
       if (xpos > this.width / 2) {
@@ -144,15 +164,23 @@ export default class Game {
     }
   };
 
+  lastdx;
   onTouchesMoved = ({ touches, gestureState: { dx } }) => {
     if (!this.level.playing && this.level.acceptInput) {
       this.onGameStart();
     }
 
+    // let frameDelta = dx;
+    // if (this.lastdx) {
+    //   frameDelta = this.lastdx - dx;
+    // }
+    // // this.level.direction = dx; //frameDelta * -10;
+
+    // this.lastdx = dx;
+
     for (let i = 0; i < touches.length; i++) {
       const xpos = touches[i].pageX;
       if (xpos > this.width / 2) {
-        this.level.direction = this.minMoveSpeed + dx;
       } else {
         this.level.direction = -this.minMoveSpeed + dx;
       }
@@ -161,5 +189,6 @@ export default class Game {
 
   onTouchesEnded = ({ changedTouches }) => {
     this.level.direction = 0;
+    this.lastdx = null;
   };
 }
