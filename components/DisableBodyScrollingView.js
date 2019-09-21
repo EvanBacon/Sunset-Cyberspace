@@ -10,8 +10,8 @@ const getElement = component => {
   }
 };
 
-const freezeBody = ({ preventDefault }) => {
-  preventDefault();
+const freezeBody = e => {
+  e.preventDefault();
 };
 
 class DisableBodyScrollingView extends React.Component {
