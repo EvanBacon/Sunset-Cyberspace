@@ -9,61 +9,57 @@ import {
   View,
 } from 'react-native';
 
-export default class LicensesListItem extends Component {
-  render() {
-    const {
-      image,
-      userUrl,
-      username,
-      name,
-      version,
-      color,
-      licenses,
-      repository,
-      licenseUrl,
-      parents,
-    } = this.props;
-
-    let title = name;
-    if (username) {
-      if (title.toLowerCase() != username.toLowerCase()) {
-        title += ` by ${username}`;
-      }
+export default function LicensesListItem({
+  image,
+  userUrl,
+  username,
+  name,
+  version,
+  color,
+  licenses,
+  repository,
+  licenseUrl,
+  parents,
+}) {
+  let title = name;
+  if (username) {
+    if (title.toLowerCase() != username.toLowerCase()) {
+      title += ` by ${username}`;
     }
+  }
 
-    return (
-      <View style={{ flex: 1 }}>
-        <View style={styles.cardShadow}>
-          <View style={[styles.card, { backgroundColor: color }]}>
-            {image && (
-              <TouchableOpacity onPress={() => Linking.openURL(userUrl)}>
-                <Image source={{ uri: image }} style={styles.image} />
-              </TouchableOpacity>
-            )}
-            <TouchableOpacity
-              underlayColor={'#eeeeee'}
-              onPress={() => Linking.openURL(repository)}
-              style={styles.item}
-            >
-              <View style={{ maxWidth: '90%' }}>
-                <Text style={styles.name}>{title}</Text>
-                <Link style={styles.text} url={licenseUrl}>
-                  {licenses}
-                </Link>
-                <Link style={styles.text}>{version}</Link>
-              </View>
-              <FontAwesome
-                style={{ alignSelf: 'center' }}
-                color={'white'}
-                size={16}
-                name={'chevron-right'}
-              />
+  return (
+    <View style={{ flex: 1 }}>
+      <View style={styles.cardShadow}>
+        <View style={[styles.card, { backgroundColor: color }]}>
+          {image && (
+            <TouchableOpacity onPress={() => Linking.openURL(userUrl)}>
+              <Image source={{ uri: image }} style={styles.image} />
             </TouchableOpacity>
-          </View>
+          )}
+          <TouchableOpacity
+            underlayColor={'#eeeeee'}
+            onPress={() => Linking.openURL(repository)}
+            style={styles.item}
+          >
+            <View style={{ maxWidth: '90%' }}>
+              <Text style={styles.name}>{title}</Text>
+              <Link style={styles.text} url={licenseUrl}>
+                {licenses}
+              </Link>
+              <Link style={styles.text}>{version}</Link>
+            </View>
+            <FontAwesome
+              style={{ alignSelf: 'center' }}
+              color={'white'}
+              size={16}
+              name={'chevron-right'}
+            />
+          </TouchableOpacity>
         </View>
       </View>
-    );
-  }
+    </View>
+  );
 }
 
 const Link = ({ url, style, children }) => (

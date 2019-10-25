@@ -4,8 +4,8 @@
     "description": "A retro runner game!",
     "slug": "cyberspace",
     "privacy": "public",
-    "sdkVersion": "33.0.0",
-    "version": "2.0.0",
+    "sdkVersion": "35.0.0",
+    "version": "3.0.0",
     "orientation": "landscape",
     "scheme": "cyberspace",
     "platforms": ["ios", "android", "web"],
@@ -17,7 +17,7 @@
       "backgroundColor": "#000000"
     },
     "packagerOpts": {
-      "assetExts": ["ttf", "mp4", "obj", "jpg", "txt"]
+      "config": "metro.config.js"
     },
     "ios": {
       "appStoreUrl": "https://itunes.apple.com/us/app/sunset-cyberspace/id1332439319?ls=1&mt=8",

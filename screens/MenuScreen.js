@@ -6,66 +6,59 @@ import Button from '../components/Button';
 import MenuTitle from '../components/MenuTitle';
 
 const SONG_URL = 'https://www.newgrounds.com/audio/listen/726455';
-class AnimatedViewParent extends React.Component {
-  render() {
-    const { isPlaying, ...props } = this.props;
-
-    return (
-      <Animatable.View
-        iterationCount={isPlaying ? 1 : 'infinite'}
-        easing="ease-out"
-        useNativeDriver
-        {...props}
-      />
-    );
-  }
+function AnimatedViewParent({ isPlaying, ...props }) {
+  return (
+    <Animatable.View
+      iterationCount={isPlaying ? 1 : 'infinite'}
+      easing="ease-out"
+      useNativeDriver
+      {...props}
+    />
+  );
 }
 
-class MenuScreen extends React.Component {
-  render() {
-    const { score, playing, onStory } = this.props;
-    return (
-      <View pointerEvents="box-none" style={styles.container}>
-        <Animatable.View
-          key={'score'}
-          easing="ease-out"
-          animation={'bounceInRight'}
-          style={styles.scoreContainer}
-        >
-          <Text style={styles.scoreText}>{score}</Text>
-        </Animatable.View>
+function MenuScreen({ score, playing, onStory, navigation }) {
+  return (
+    <View pointerEvents="box-none" style={styles.container}>
+      <Animatable.View
+        key="score"
+        easing="ease-out"
+        animation="bounceInRight"
+        style={styles.scoreContainer}
+      >
+        <Text style={styles.scoreText}>{score}</Text>
+      </Animatable.View>
 
-        <MenuTitle playing={playing} />
+      <MenuTitle playing={playing} />
 
-        <AnimatedViewParent
-          style={styles.storyButtonWrapper}
-          animation={playing ? 'bounceOut' : 'pulse'}
-          isPlaying={playing}
-        >
-          <Button title="VIEW STORY" onPress={onStory} />
-        </AnimatedViewParent>
+      <AnimatedViewParent
+        style={styles.storyButtonWrapper}
+        animation={playing ? 'bounceOut' : 'pulse'}
+        isPlaying={playing}
+      >
+        <Button title="VIEW STORY" onPress={onStory} />
+      </AnimatedViewParent>
 
-        <AnimatedViewParent
-          style={styles.songButtonWrapper}
-          animation={playing ? 'bounceOut' : 'pulse'}
-          isPlaying={playing}
-        >
-          <Button title="SONG" onPress={() => Linking.openURL(SONG_URL)} />
-        </AnimatedViewParent>
+      <AnimatedViewParent
+        style={styles.songButtonWrapper}
+        animation={playing ? 'bounceOut' : 'pulse'}
+        isPlaying={playing}
+      >
+        <Button title="SONG" onPress={() => Linking.openURL(SONG_URL)} />
+      </AnimatedViewParent>
 
-        <AnimatedViewParent
-          style={styles.animatableView}
-          animation={playing ? 'bounceOut' : 'pulse'}
-          isPlaying={playing}
-        >
-          <Button
-            title="LICENSES"
-            onPress={() => this.props.navigation.navigate('Licenses')}
-          />
-        </AnimatedViewParent>
-      </View>
-    );
-  }
+      <AnimatedViewParent
+        style={styles.animatableView}
+        animation={playing ? 'bounceOut' : 'pulse'}
+        isPlaying={playing}
+      >
+        <Button
+          title="LICENSES"
+          onPress={() => navigation.navigate('Licenses')}
+        />
+      </AnimatedViewParent>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({

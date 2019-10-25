@@ -1,7 +1,7 @@
 import { GraphicsView } from 'expo-graphics';
-import ExpoTHREE, { THREE } from '../expo-three';
+import { THREE, Renderer } from 'expo-three';
 import React from 'react';
-
+import { PixelRatio } from 'react-native';
 import TouchableView from '../components/TouchableView';
 import Colors from '../constants/Colors';
 import Game from '../game/Game';
@@ -14,11 +14,19 @@ class GameScreen extends React.Component {
   shouldComponentUpdate = (nextProps, nextState) => false;
   game = {};
 
+  _onLayout = ({
+    nativeEvent: {
+      layout: { x, y, width, height },
+    },
+  }) => {
+    const scale = PixelRatio.get();
+    this.onResize({ x, y, width, height, scale, pixelRatio: scale });
+  };
+
   render = () => (
     <DisableBodyScrollingView>
       <KeyboardControlsView
         onDown={({ code }) => {
-          console.log('press', code);
           if (this.game) {
             if (code === 'ArrowRight' || code === 'KeyD') {
               this.game.onRight();
@@ -33,6 +41,7 @@ class GameScreen extends React.Component {
       >
         <TouchableView
           id="game"
+          onLayout={this._onLayout}
           shouldCancelWhenOutside={false}
           onTouchesBegan={event => this.game.onTouchesBegan(event)}
           onTouchesMoved={event => this.game.onTouchesMoved(event)}
@@ -42,7 +51,6 @@ class GameScreen extends React.Component {
             style={{ flex: 1 }}
             onContextCreate={this.onContextCreate}
             onRender={this.onRender}
-            onResize={this.onResize}
           />
         </TouchableView>
       </KeyboardControlsView>
@@ -60,7 +68,7 @@ class GameScreen extends React.Component {
     const crazy = false;
 
     // renderer
-    this.renderer = new ExpoTHREE.Renderer({
+    this.renderer = new Renderer({
       width,
       height,
       gl,

@@ -6,44 +6,40 @@ import Assets from '../Assets';
 
 const SONG_URL = 'https://www.newgrounds.com/audio/listen/726455';
 
-class MenuTitle extends React.Component {
-  render() {
-    const { playing } = this.props;
-
-    return (
-      <View pointerEvents="none" style={styles.imageWrapper}>
+function MenuTitle({ playing }) {
+  return (
+    <View pointerEvents="none" style={styles.imageWrapper}>
+      <Animatable.Image
+        useNativeDriver
+        animation={playing ? 'bounceOutRight' : 'bounceInLeft'}
+        style={styles.image}
+        source={Assets.images['retro_subtitle.png']}
+      />
+      <Animatable.View
+        useNativeDriver
+        animation={playing ? 'bounceOut' : 'zoomInDown'}
+        style={styles.titleWrapper}
+      >
         <Animatable.Image
           useNativeDriver
-          animation={playing ? 'bounceOutRight' : 'bounceInLeft'}
-          style={styles.image}
-          source={Assets.images['retro_subtitle.png']}
-        />
-        <Animatable.View
-          useNativeDriver
-          animation={playing ? 'bounceOut' : 'zoomInDown'}
-          style={styles.titleWrapper}
-        >
-          <Animatable.Image
-            useNativeDriver
-            delay={500}
-            iterationCount="infinite"
-            animation="pulse"
-            easing="ease-out"
-            style={styles.image}
-            source={Assets.images['retro_title.png']}
-          />
-        </Animatable.View>
-
-        <Animatable.Image
-          useNativeDriver
-          animation={playing ? 'bounceOutLeft' : 'bounceInRight'}
           delay={500}
+          iterationCount="infinite"
+          animation="pulse"
+          easing="ease-out"
           style={styles.image}
-          source={Assets.images['retro_last_title.png']}
+          source={Assets.images['retro_title.png']}
         />
-      </View>
-    );
-  }
+      </Animatable.View>
+
+      <Animatable.Image
+        useNativeDriver
+        animation={playing ? 'bounceOutLeft' : 'bounceInRight'}
+        delay={500}
+        style={styles.image}
+        source={Assets.images['retro_last_title.png']}
+      />
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({

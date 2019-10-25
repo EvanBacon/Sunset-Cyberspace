@@ -1,6 +1,17 @@
-import ExpoTHREE, { THREE } from '../expo-three';
+import { TextureLoader } from 'expo-three';
 import ImprovedNoise from 'improved-noise';
 import { Platform } from 'react-native';
+import {
+  AdditiveBlending,
+  DoubleSide,
+  Geometry,
+  Mesh,
+  MeshBasicMaterial,
+  PlaneGeometry,
+  Points,
+  PointsMaterial,
+  Vector3,
+} from 'three';
 
 import Assets from '../Assets';
 import Colors from '../constants/Colors';
@@ -33,11 +44,11 @@ export default class Particles {
 
   init = async () => {
     //make falling particles
-    this.particlesGeometry = new THREE.Geometry();
+    this.particlesGeometry = new Geometry();
 
     for (let i = 0; i < PARTICLES_COUNT; i++) {
       this.particlesGeometry.vertices.push(
-        new THREE.Vector3(
+        new Vector3(
           randomRange(-Settings.FLOOR_WIDTH / 2, Settings.FLOOR_WIDTH / 2),
           randomRange(Settings.PARTICLES_BOTTOM, Settings.PARTICLES_TOP),
           randomRange(-Settings.FLOOR_DEPTH / 2, Settings.FLOOR_DEPTH / 2),
@@ -45,38 +56,38 @@ export default class Particles {
       );
     }
 
-    const particlesMaterial = new THREE.PointsMaterial({
+    const particlesMaterial = new PointsMaterial({
       size: 50,
       // sizeAttenuation: true,
-      map: await ExpoTHREE.loadAsync(Assets.images['particle.png']),
+      map: new TextureLoader().load(Assets.images['particle.png']),
       transparent: true,
-      blending: THREE.AdditiveBlending,
+      blending: AdditiveBlending,
       depthTest: true,
       opacity: 0.7,
       depthWrite: false,
     });
 
     this.level.moverGroup.add(
-      new THREE.Points(this.particlesGeometry, particlesMaterial),
+      new Points(this.particlesGeometry, particlesMaterial),
     );
 
     //STRIPS
     //add bars for at high speed
 
-    this.barMaterial = new THREE.MeshBasicMaterial({
+    this.barMaterial = new MeshBasicMaterial({
       color: Colors.bar,
-      blending: THREE.AdditiveBlending,
+      blending: AdditiveBlending,
       depthTest: false,
       transparent: true,
       opacity: 0.6,
       // sizeAttenuation: true,
-      side: THREE.DoubleSide,
+      side: DoubleSide,
     });
 
-    const barGeom = new THREE.PlaneGeometry(20, 500, 1, 1);
+    const barGeom = new PlaneGeometry(20, 500, 1, 1);
 
     for (let i = 0; i < BAR_COUNT; i++) {
-      const bar = new THREE.Mesh(barGeom, this.barMaterial);
+      const bar = new Mesh(barGeom, this.barMaterial);
 
       bar.scale.x = randomRange(0.2, 2);
       bar.origYScale = randomRange(0.2, 2);

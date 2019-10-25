@@ -12,8 +12,8 @@ export default function HomeScreen({ navigation }) {
   const [isGameLoaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    AudioManager.sharedInstance.playAsync('intro', true);
-    return () => AudioManager.sharedInstance.stopAsync('intro');
+    AudioManager.playAsync('intro', true);
+    return () => AudioManager.stopAsync('intro');
   }, []);
 
   return (
@@ -28,12 +28,12 @@ export default function HomeScreen({ navigation }) {
           setPlaying(playing);
 
           if (isPlaying) {
-            AudioManager.sharedInstance.stopAsync('intro');
+            AudioManager.stopAsync('intro');
             setScore(0);
             setIsHighScore(false);
           } else {
-            AudioManager.sharedInstance.stopAsync('retro');
-            AudioManager.sharedInstance.playAsync('intro', true);
+            AudioManager.stopAsync('retro');
+            AudioManager.playAsync('intro', true);
           }
         }}
       />

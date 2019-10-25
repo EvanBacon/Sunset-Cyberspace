@@ -2,46 +2,31 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 
-import Story from '../constants/Story';
 import CharacterScene from '../components/CharacterScene';
+import Story from '../constants/Story';
 
-class StoryScreen extends React.Component {
-  static defaultProps = {
-    data: Story,
-  };
-  state = {
-    finished: false,
-  };
+function StoryScreen({ navigation, data = Story }) {
+  const [finished, setFinished] = React.useState(false);
 
-  onAnimationEnd = () => {
-    if (this.state.finished) {
-      this.props.navigation.goBack();
-    }
-  };
-
-  get animation() {
-    return this.state.finished ? 'fadeOut' : 'fadeIn';
-  }
-
-  onFinish = () => this.setState({ finished: true });
-
-  render() {
-    return (
-      <Animatable.View
-        useNativeDriver
-        onAnimationEnd={this.onAnimationEnd}
-        animation={this.animation}
-        duration={2000}
-        style={{
-          ...StyleSheet.absoluteFillObject,
-          backgroundColor: 'black',
-          padding: 0,
-        }}
-      >
-        <CharacterScene onFinish={this.onFinish} data={this.props.data} />
-      </Animatable.View>
-    );
-  }
+  return (
+    <Animatable.View
+      useNativeDriver
+      onAnimationEnd={() => {
+        if (finished) {
+          navigation.goBack();
+        }
+      }}
+      animation={finished ? 'fadeOut' : 'fadeIn'}
+      duration={2000}
+      style={{
+        ...StyleSheet.absoluteFillObject,
+        backgroundColor: 'black',
+        padding: 0,
+      }}
+    >
+      <CharacterScene onFinish={() => setFinished(true)} data={data} />
+    </Animatable.View>
+  );
 }
 
 export default StoryScreen;

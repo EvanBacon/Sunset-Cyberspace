@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { FlatList, StyleSheet } from 'react-native';
 
 import LicensesListItem from './LicensesListItem';
@@ -12,24 +12,19 @@ const colors = [
   '#7a24d5',
 ];
 
-class Licenses extends Component {
-  renderItem = ({ item, index }) => (
-    <LicensesListItem {...item} color={colors[index % colors.length]} />
+function Licenses({ licenses }) {
+  return (
+    <FlatList
+      style={styles.list}
+      keyExtractor={({ key }) => key}
+      data={licenses}
+      numColumns={2}
+      renderItem={({ item, index }) => (
+        <LicensesListItem {...item} color={colors[index % colors.length]} />
+      )}
+      contentContainerStyle={{ paddingBottom: 56 }}
+    />
   );
-  render() {
-    const { licenses } = this.props;
-
-    return (
-      <FlatList
-        style={styles.list}
-        keyExtractor={({ key }) => key}
-        data={licenses}
-        numColumns={2}
-        renderItem={this.renderItem}
-        contentContainerStyle={{ paddingBottom: 56 }}
-      />
-    );
-  }
 }
 
 const styles = StyleSheet.create({

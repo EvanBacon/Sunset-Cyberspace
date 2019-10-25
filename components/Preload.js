@@ -1,11 +1,21 @@
 import { ScreenOrientation } from 'expo';
-import * as AssetUtils from 'expo-asset-utils';
+// import * as AssetUtils from 'expo-asset-utils';
 import React from 'react';
 
 import Assets from '../Assets';
 import AudioManager from '../AudioManager';
 import Navigator from '../navigation/AppNavigator';
 import LoadingScreen from '../screens/LoadingScreen';
+
+import { loadAsync } from 'expo-font';
+
+function cacheFonts(fonts) {
+  try {
+    return fonts.map(font => loadAsync(font));
+  } catch (error) {
+    throw new Error('Expo have to be installed if you want to use Font');
+  }
+}
 
 function assetsFromFonts(fonts = {}) {
   const items = {};
@@ -35,12 +45,13 @@ class Preload extends React.Component {
   // }
 
   async preloadAssets() {
-    await AssetUtils.cacheAssetsAsync({
-      fonts: assetsFromFonts(Assets.fonts),
-      // files: this.files,
-      // audio: this.audio,
-    });
-    await AudioManager.sharedInstance.setupAsync();
+    await cacheFonts(assetsFromFonts(Assets.fonts));
+    // await AssetUtils.cacheAssetsAsync({
+    //   fonts: cacheFonts(assetsFromFonts(Assets.fonts)),
+    //   // files: this.files,
+    //   // audio: this.audio,
+    // });
+    await AudioManager.setupAsync();
     this.setState({ loading: false });
   }
 

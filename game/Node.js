@@ -1,6 +1,6 @@
-import ExpoTHREE, { THREE } from '../expo-three';
+import { Object3D } from 'three';
 
-class Node extends THREE.Object3D {
+class Node extends Object3D {
   async setupAsync() {}
   update() {}
 }

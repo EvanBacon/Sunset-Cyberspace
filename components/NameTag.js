@@ -1,22 +1,13 @@
 import React from 'react';
-import { Platform, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 
 import Colors from '../constants/Colors';
 
-const isIphone = Platform.OS === 'ios';
-
-class NameTag extends React.Component {
-  render() {
-    const { children, style } = this.props;
-    return (
-      <View style={[style, styles.container]}>
-        <Text style={styles.text}>{children}</Text>
-      </View>
-    );
-  }
-}
-
-export default NameTag;
+export default ({ children, style }) => (
+  <View style={[style, styles.container]}>
+    <Text style={styles.text}>{children}</Text>
+  </View>
+);
 
 const styles = StyleSheet.create({
   container: {

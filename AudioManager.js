@@ -1,4 +1,4 @@
-import { Audio } from 'expo';
+import { Audio } from 'expo-av';
 
 // import * as AssetUtils from 'expo-asset-utils';
 import Assets from './Assets';
@@ -14,8 +14,8 @@ class AudioManager {
         await soundObject.setPositionAsync(0);
         await soundObject.setIsLoopingAsync(isLooping);
         await soundObject.playAsync();
-      } catch (error) {
-        console.warn('Error playing audio', { error });
+      } catch ({ message }) {
+        console.warn(`Error playing audio: ${message}`);
       }
     } else {
       console.warn("Audio doesn't exist", name);
@@ -27,8 +27,8 @@ class AudioManager {
       const soundObject = this.sounds[name];
       try {
         await soundObject.stopAsync();
-      } catch (error) {
-        console.warn('Error playing audio', { error });
+      } catch ({ message }) {
+        console.warn(`Error stopping audio: ${message}`);
       }
     } else {
       console.warn("Audio doesn't exist", name);
@@ -61,6 +61,4 @@ class AudioManager {
     Promise.all([this.configureExperienceAudioAsync(), this.setupAudioAsync()]);
 }
 
-AudioManager.sharedInstance = new AudioManager();
-
-export default AudioManager;
+export default new AudioManager();

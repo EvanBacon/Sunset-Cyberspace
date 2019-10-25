@@ -1,26 +1,21 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
-class KeyboardControlsView extends React.Component {
-  componentDidMount() {
-    window.addEventListener('keydown', this.onKeyDown, false);
-    window.addEventListener('keyup', this.onKeyUp, false);
-  }
-  componentWillUnmount() {
-    window.removeEventListener('keydown', this.onKeyDown);
-    window.removeEventListener('keyup', this.onKeyUp);
-  }
+export default function KeyboardControlsView({ children, onDown, onUp }) {
+  useEffect(() => {
+    const onKey = e => onDown(e);
 
-  onKeyDown = e => {
-    this.props.onDown(e);
-  };
+    window.addEventListener('keydown', onKey, false);
 
-  onKeyUp = e => {
-    this.props.onUp(e);
-  };
+    return () => window.removeEventListener('keydown', onKey);
+  }, [onDown]);
 
-  render() {
-    return this.props.children;
-  }
+  useEffect(() => {
+    const onKey = e => onUp && onUp(e);
+
+    window.addEventListener('keyup', onKey, false);
+
+    return () => window.removeEventListener('keyup', onKey);
+  }, [onUp]);
+
+  return children;
 }
-
-export default KeyboardControlsView;
