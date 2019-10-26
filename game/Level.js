@@ -1,6 +1,16 @@
-import ExpoTHREE, { THREE } from 'expo-three';
 import { TweenMax } from 'gsap';
 import ImprovedNoise from 'improved-noise';
+import {
+  CylinderGeometry,
+  DoubleSide,
+  LineBasicMaterial,
+  LineSegments,
+  Mesh,
+  MeshLambertMaterial,
+  Object3D,
+  PlaneGeometry,
+  WireframeGeometry,
+} from 'three';
 
 import AudioManager from '../AudioManager';
 import Colors from '../constants/Colors';
@@ -52,27 +62,27 @@ export default class Level {
     await lighting.setupAsync();
     this.game.scene.add(lighting);
 
-    this.moverGroup = new THREE.Object3D();
+    this.moverGroup = new Object3D();
     this.game.scene.add(this.moverGroup);
 
     //make floor
-    const floorGroup = new THREE.Object3D();
+    const floorGroup = new Object3D();
 
-    this.floorMaterial = new THREE.MeshLambertMaterial({
+    this.floorMaterial = new MeshLambertMaterial({
       color: Colors.floor, //diffuse
       emissive: Colors.dark,
-      side: THREE.DoubleSide,
+      side: DoubleSide,
     });
     this.floorMaterial.flatShading = true;
 
     //add extra x width
-    this.floorGeometry = new THREE.PlaneGeometry(
+    this.floorGeometry = new PlaneGeometry(
       Settings.FLOOR_WIDTH + 1200,
       Settings.FLOOR_DEPTH,
       FLOOR_RES,
       FLOOR_RES,
     );
-    const floorMesh = new THREE.Mesh(this.floorGeometry, [this.floorMaterial]);
+    const floorMesh = new Mesh(this.floorGeometry, [this.floorMaterial]);
     floorGroup.add(floorMesh);
     this.moverGroup.add(floorGroup);
     floorMesh.rotation.x = Math.PI / 2;
@@ -80,16 +90,16 @@ export default class Level {
     this.moverGroup.position.z = -Settings.MOVE_STEP;
     floorGroup.position.z = 500;
 
-    this.geometry2 = new THREE.WireframeGeometry(this.floorGeometry); // or EdgesGeometry
-    let material2 = new THREE.LineBasicMaterial({
+    this.geometry2 = new WireframeGeometry(this.floorGeometry); // or EdgesGeometry
+    let material2 = new LineBasicMaterial({
       color: Colors.blue,
       linewidth: LINE_WIDTH,
       transparent: true,
     });
-    this.wireframe = new THREE.LineSegments(this.geometry2, material2);
+    this.wireframe = new LineSegments(this.geometry2, material2);
     floorMesh.add(this.wireframe);
 
-    this.obstacleGeom = new THREE.CylinderGeometry(0, 256, 640, 8, 1, false);
+    this.obstacleGeom = new CylinderGeometry(0, 256, 640, 8, 1, false);
 
     let obstacle;
     for (let i = 0; i < OBSTACLE_COUNT; i++) {
@@ -118,7 +128,7 @@ export default class Level {
       this.moverGroup.add(obstacle);
       obstacle.position.x = Settings.FLOOR_WIDTH / 2 + 300;
       obstacle.position.z =
-        Settings.FLOOR_DEPTH * i / EDGE_OBSTACLE_COUNT -
+        (Settings.FLOOR_DEPTH * i) / EDGE_OBSTACLE_COUNT -
         Settings.FLOOR_DEPTH / 2;
     }
 
@@ -129,7 +139,7 @@ export default class Level {
       this.moverGroup.add(obstacle);
       obstacle.position.x = -(Settings.FLOOR_WIDTH / 2 + 300);
       obstacle.position.z =
-        Settings.FLOOR_DEPTH * i / EDGE_OBSTACLE_COUNT -
+        (Settings.FLOOR_DEPTH * i) / EDGE_OBSTACLE_COUNT -
         Settings.FLOOR_DEPTH / 2;
     }
 
@@ -156,12 +166,12 @@ export default class Level {
   };
 
   makeObstacle = (scale, materialID, color = Colors.red) => {
-    const obstacle = new THREE.Object3D();
-    const cone = new THREE.Mesh(this.obstacleGeom, this.floorMaterial);
+    const obstacle = new Object3D();
+    const cone = new Mesh(this.obstacleGeom, this.floorMaterial);
     cone.add(
-      new THREE.LineSegments(
-        new THREE.WireframeGeometry(this.obstacleGeom),
-        new THREE.LineBasicMaterial({
+      new LineSegments(
+        new WireframeGeometry(this.obstacleGeom),
+        new LineBasicMaterial({
           color,
           transparent: true,
           linewidth: LINE_WIDTH,
@@ -184,7 +194,8 @@ export default class Level {
     //calculate vert psons base on noise
     let ipos;
     const offset =
-      this.stepCount * Settings.MOVE_STEP / Settings.FLOOR_DEPTH * FLOOR_RES;
+      ((this.stepCount * Settings.MOVE_STEP) / Settings.FLOOR_DEPTH) *
+      FLOOR_RES;
 
     for (let i = 0; i < FLOOR_RES + 1; i++) {
       for (let j = 0; j < FLOOR_RES + 1; j++) {
@@ -192,14 +203,14 @@ export default class Level {
         const cur = i * (FLOOR_RES + 1) + j;
         this.floorGeometry.vertices[cur].z =
           this.snoise.noise(
-            ipos / FLOOR_RES * this.noiseScale,
-            j / FLOOR_RES * this.noiseScale,
+            (ipos / FLOOR_RES) * this.noiseScale,
+            (j / FLOOR_RES) * this.noiseScale,
             this.noiseSeed,
           ) * FLOOR_THICKNESS;
       }
     }
     this.floorGeometry.verticesNeedUpdate = true;
-    this.wireframe.geometry = new THREE.WireframeGeometry(this.floorGeometry);
+    this.wireframe.geometry = new WireframeGeometry(this.floorGeometry);
 
     for (let i = 0; i < OBSTACLE_COUNT; i++) {
       const obstacle = this.obstacles[i];
@@ -211,7 +222,7 @@ export default class Level {
       ) {
         obstacle.collided = false;
         obstacle.position.z -= Settings.FLOOR_DEPTH;
-        ipos = obstacle.posi + offset / FLOOR_RES * Settings.FLOOR_DEPTH;
+        ipos = obstacle.posi + (offset / FLOOR_RES) * Settings.FLOOR_DEPTH;
         //re-randomize x pos
         obstacle.posj = Math.random();
         obstacle.position.x =
@@ -232,7 +243,7 @@ export default class Level {
       this.collectible.position.z -= Settings.FLOOR_DEPTH;
       //re-randomize x pos
       this.collectible.posj = Math.random();
-      const xRange = Settings.FLOOR_WIDTH / 2 * 0.7;
+      const xRange = (Settings.FLOOR_WIDTH / 2) * 0.7;
       this.collectible.position.x = randomRange(-xRange, xRange);
     }
   };
@@ -268,7 +279,7 @@ export default class Level {
         nextx < -Settings.FLOOR_WIDTH / 2
       ) {
         this.slideSpeed = -this.slideSpeed;
-        AudioManager.sharedInstance.playAsync('hit');
+        AudioManager.playAsync('hit');
       }
 
       this.game.camera.position.x += delta * this.slideSpeed;

@@ -1,0 +1,75 @@
+{
+  "expo-asset-utils@0.0.4-alpha.2": {
+    "licenses": "MIT",
+    "repository": "https://github.com/expo/expo-asset-utils",
+    "licenseUrl": "https://github.com/expo/expo-asset-utils",
+    "parents": "sunset-cyberspace"
+  },
+  "expo-graphics@0.0.4": {
+    "licenses": "UNKNOWN",
+    "repository": "https://github.com/expo/expo-graphics",
+    "licenseUrl": "https://github.com/expo/expo-graphics",
+    "parents": "sunset-cyberspace"
+  },
+  "expo-three@2.2.2-alpha.1": {
+    "licenses": "MIT",
+    "repository": "https://github.com/expo/expo-three",
+    "licenseUrl": "https://github.com/expo/expo-three",
+    "parents": "sunset-cyberspace"
+  },
+  "expo@27.0.1": {
+    "licenses": "MIT",
+    "repository": "https://github.com/expo/expo-sdk",
+    "licenseUrl": "https://github.com/expo/expo-sdk",
+    "parents": "sunset-cyberspace"
+  },
+  "gsap@1.20.4": {
+    "licenses":
+      "Standard 'no charge' license: https://greensock.com/standard-license. Club GreenSock members get more: https://greensock.com/licensing/. Why GreenSock doesn't employ an MIT license: https://greensock.com/why-license/",
+    "repository": "https://github.com/greensock/GreenSock-JS",
+    "licenseUrl": "https://github.com/greensock/GreenSock-JS",
+    "parents": "sunset-cyberspace"
+  },
+  "improved-noise@0.0.3": {
+    "licenses": "MIT",
+    "parents": "sunset-cyberspace"
+  },
+  "react-native-animatable@1.2.4": {
+    "licenses": "MIT",
+    "repository": "https://github.com/oblador/react-native-animatable",
+    "licenseUrl":
+      "https://github.com/oblador/react-native-animatable/raw/master/LICENSE",
+    "parents": "sunset-cyberspace"
+  },
+  "react-native-typewriter@0.5.3": {
+    "licenses": "MIT",
+    "repository": "https://github.com/TaylorBriggs/react-native-typewriter",
+    "licenseUrl":
+      "https://github.com/TaylorBriggs/react-native-typewriter/raw/master/LICENSE",
+    "parents": "sunset-cyberspace"
+  },
+  "react-native@0.55.2": {
+    "licenses": "MIT",
+    "repository": "https://github.com/facebook/react-native",
+    "licenseUrl": "https://github.com/facebook/react-native/raw/master/LICENSE",
+    "parents": "sunset-cyberspace"
+  },
+  "react@16.3.2": {
+    "licenses": "MIT",
+    "repository": "https://github.com/facebook/react",
+    "licenseUrl": "https://github.com/facebook/react/raw/master/LICENSE",
+    "parents": "sunset-cyberspace"
+  },
+  "three@0.92.0": {
+    "licenses": "MIT",
+    "repository": "https://github.com/mrdoob/three.js",
+    "licenseUrl": "https://github.com/mrdoob/three.js/raw/master/LICENSE",
+    "parents": "sunset-cyberspace"
+  },
+  "tween.js@16.6.0": {
+    "licenses": "MIT",
+    "repository": "https://github.com/tweenjs/tween.js",
+    "licenseUrl": "https://github.com/tweenjs/tween.js/raw/master/LICENSE",
+    "parents": "sunset-cyberspace"
+  }
+}

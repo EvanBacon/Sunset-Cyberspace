@@ -1,7 +1,7 @@
 export default {
   //debug toggles
-  playSound: true, //TODO: Link this
-  playMusic: true, //TODO: Link this
+  playSound: false, //TODO: Link this
+  playMusic: false, //TODO: Link this
   hitDetect: true,
   //const dimensions
   FLOOR_WIDTH: 3600, // size of floor in x direction

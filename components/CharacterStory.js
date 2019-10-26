@@ -8,13 +8,15 @@ class CharacterStory extends React.Component {
     onFinish: PropTypes.func.isRequired,
     data: PropTypes.array.isRequired,
   };
+
   state = { index: 0 };
+
   render() {
     const { index } = this.state;
     const { data, onFinish } = this.props;
     const item = data[index];
     if (!item) {
-      console.warn('Empty Story!');
+      throw new Error('Empty Story!');
       return null;
     }
     return (

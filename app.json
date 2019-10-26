@@ -4,10 +4,11 @@
     "description": "A retro runner game!",
     "slug": "cyberspace",
     "privacy": "public",
-    "sdkVersion": "27.0.0",
-    "version": "1.0.1",
+    "sdkVersion": "35.0.0",
+    "version": "3.0.0",
     "orientation": "landscape",
     "scheme": "cyberspace",
+    "platforms": ["ios", "android", "web"],
     "primaryColor": "#056ECF",
     "icon": "./assets/icons/expo.png",
     "splash": {
@@ -16,11 +17,10 @@
       "backgroundColor": "#000000"
     },
     "packagerOpts": {
-      "assetExts": ["ttf", "mp4", "obj", "jpg", "txt", "json"]
+      "config": "metro.config.js"
     },
     "ios": {
-      "appStoreUrl":
-        "https://itunes.apple.com/us/app/sunset-cyberspace/id1332439319?ls=1&mt=8",
+      "appStoreUrl": "https://itunes.apple.com/us/app/sunset-cyberspace/id1332439319?ls=1&mt=8",
       "supportsTablet": true,
       "bundleIdentifier": "com.evanbacon.cyberspace",
       "buildNumber": "0.0.1",
@@ -36,8 +36,7 @@
       }
     },
     "android": {
-      "playStoreUrl":
-        "https://play.google.com/store/apps/details?id=com.evanbacon.cyberspace",
+      "playStoreUrl": "https://play.google.com/store/apps/details?id=com.evanbacon.cyberspace",
       "icon": "./assets/icons/android.png",
       "package": "com.evanbacon.cyberspace",
       "versionCode": 1

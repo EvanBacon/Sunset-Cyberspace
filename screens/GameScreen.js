@@ -1,10 +1,12 @@
-import ExpoGraphics from 'expo-graphics';
-import ExpoTHREE, { THREE } from 'expo-three';
+import { GraphicsView } from 'expo-graphics';
+import { THREE, Renderer } from 'expo-three';
 import React from 'react';
-
+import { PixelRatio } from 'react-native';
 import TouchableView from '../components/TouchableView';
 import Colors from '../constants/Colors';
 import Game from '../game/Game';
+import DisableBodyScrollingView from '../components/DisableBodyScrollingView';
+import KeyboardControlsView from '../components/KeyboardControlsView';
 
 require('three/examples/js/shaders/FXAAShader');
 
@@ -12,43 +14,70 @@ class GameScreen extends React.Component {
   shouldComponentUpdate = (nextProps, nextState) => false;
   game = {};
 
+  _onLayout = ({
+    nativeEvent: {
+      layout: { x, y, width, height },
+    },
+  }) => {
+    const scale = PixelRatio.get();
+    this.onResize({ x, y, width, height, scale, pixelRatio: scale });
+  };
+
   render = () => (
-    <TouchableView
-      id="game"
-      shouldCancelWhenOutside={false}
-      onTouchesBegan={event => this.game.onTouchesBegan(event)}
-      onTouchesMoved={event => this.game.onTouchesMoved(event)}
-      onTouchesEnded={event => this.game.onTouchesEnded(event)}
-    >
-      <ExpoGraphics.View
-        style={{ flex: 1 }}
-        onContextCreate={this.onContextCreate}
-        onRender={this.onRender}
-        onResize={this.onResize}
-      />
-    </TouchableView>
+    <DisableBodyScrollingView>
+      <KeyboardControlsView
+        onDown={({ code }) => {
+          if (this.game) {
+            if (code === 'ArrowRight' || code === 'KeyD') {
+              this.game.onRight();
+            } else if (code === 'ArrowLeft' || code === 'KeyA') {
+              this.game.onLeft();
+            }
+          }
+        }}
+        onUp={e => {
+          if (this.game) this.game.onKeyUp(e);
+        }}
+      >
+        <TouchableView
+          id="game"
+          onLayout={this._onLayout}
+          shouldCancelWhenOutside={false}
+          onTouchesBegan={event => this.game.onTouchesBegan(event)}
+          onTouchesMoved={event => this.game.onTouchesMoved(event)}
+          onTouchesEnded={event => this.game.onTouchesEnded(event)}
+        >
+          <GraphicsView
+            style={{ flex: 1 }}
+            onContextCreate={this.onContextCreate}
+            onRender={this.onRender}
+          />
+        </TouchableView>
+      </KeyboardControlsView>
+    </DisableBodyScrollingView>
   );
 
-  onContextCreate = async ({ gl, width, height, scale }) => {
-    // global.supportsEffects = gl.createRenderbuffer != null;
+  onContextCreate = async ({ gl, width, height, scale, pixelRatio }) => {
+    global.supportsEffects = gl.createRenderbuffer != null;
 
-    // gl.createRenderbuffer = gl.createRenderbuffer || (() => ({}));
-    // gl.bindRenderbuffer = gl.bindRenderbuffer || (() => ({}));
-    // gl.renderbufferStorage = gl.renderbufferStorage || (() => ({}));
-    // gl.framebufferRenderbuffer = gl.framebufferRenderbuffer || (() => ({}));
+    gl.createRenderbuffer = gl.createRenderbuffer || (() => ({}));
+    gl.bindRenderbuffer = gl.bindRenderbuffer || (() => ({}));
+    gl.renderbufferStorage = gl.renderbufferStorage || (() => ({}));
+    gl.framebufferRenderbuffer = gl.framebufferRenderbuffer || (() => ({}));
 
     const crazy = false;
 
     // renderer
-    this.renderer = ExpoTHREE.renderer({
+    this.renderer = new Renderer({
+      width,
+      height,
       gl,
-      // precision: crazy ? 'highp' : 'mediump',
+      pixelRatio,
+      precision: 'highp',
       antialias: false, //crazy ? true : false,
       stencil: false,
       maxLights: crazy ? 4 : 2,
     });
-    this.renderer.setPixelRatio(scale);
-    this.renderer.setSize(width, height);
     this.renderer.setClearColor(Colors.dark);
 
     // scene

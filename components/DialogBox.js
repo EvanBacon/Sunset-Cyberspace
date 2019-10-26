@@ -6,28 +6,25 @@ import Colors from '../constants/Colors';
 
 const isIphone = Platform.OS === 'ios';
 
-class CharacterDialog extends React.Component {
-  render() {
-    const { children, hasName, style, typing, onFinish } = this.props;
-    return (
-      <View
-        style={[
-          style,
-          styles.container,
-          { paddingTop: isIphone || !hasName ? 32 : 48 },
-        ]}
+function CharacterDialog({ children, hasName, style, typing, onFinish }) {
+  return (
+    <View
+      style={[
+        style,
+        styles.container,
+        { paddingTop: isIphone || !hasName ? 32 : 48 },
+      ]}
+    >
+      <TypeWriter
+        maxDelay={60}
+        typing={typing}
+        onTypingEnd={onFinish}
+        style={styles.text}
       >
-        <TypeWriter
-          maxDelay={60}
-          typing={typing}
-          onTypingEnd={onFinish}
-          style={styles.text}
-        >
-          {children}
-        </TypeWriter>
-      </View>
-    );
-  }
+        {children}
+      </TypeWriter>
+    </View>
+  );
 }
 
 export default CharacterDialog;
