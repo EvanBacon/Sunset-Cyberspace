@@ -1,9 +1,3 @@
-<!-- Banner -->
-
-[![Expo Sunset Cyberspace](/.promo/gh-banner.png)](https://cyberspace.netlify.com/)
-
-<!-- Platforms -->
-
 <p align="center">
     <a aria-label="iOS App Store" href="https://itunes.apple.com/us/app/sunset-cyberspace/id1332439319?ls=1&mt=8">
         <img align="left" src="https://img.shields.io/badge/iOS-4630EB.svg?style=for-the-badge&logo=APPLE&labelColor=000&logoColor=fff" target="_blank" />
@@ -15,6 +9,10 @@
         <img align="right" src="https://img.shields.io/badge/Android-4630EB.svg?style=for-the-badge&logo=ANDROID&labelColor=000&logoColor=fff" target="_blank" />
     </a>
 </p>
+
+
+[![Expo Sunset Cyberspace](/.promo/gh-banner.png)](https://cyberspace.netlify.com/)
+
 
 <p align="center">
     <b>Retrowave Game built for <a href="https://expo.io/">Expo</a> with <a href="https://threejs.org/">THREE.js</a>, OpenGL, WebGL, and Tween.</b>
