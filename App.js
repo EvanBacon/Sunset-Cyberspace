@@ -1,4 +1,4 @@
-// import '@expo/browser-polyfill';
+import '@expo/browser-polyfill';
 import './three-common';
 
 import React from 'react';

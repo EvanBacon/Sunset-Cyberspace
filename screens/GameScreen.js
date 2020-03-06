@@ -105,7 +105,7 @@ class GameScreen extends React.Component {
   };
 
   onResize = ({ width, height, scale }) => {
-    if (!this.game) {
+    if (!this.game || !this.camera) {
       return;
     }
     this.camera.aspect = width / height;
