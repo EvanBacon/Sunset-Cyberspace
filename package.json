@@ -5,6 +5,7 @@
   "author": null,
   "private": true,
   "scripts": {
+    "deploy:native": "npx expo publish",
     "deploy": "netlify deploy --dir web-build/ --prod"
   },
   "dependencies": {
