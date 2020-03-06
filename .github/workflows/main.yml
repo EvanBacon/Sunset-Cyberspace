@@ -23,10 +23,5 @@ jobs:
     - uses: actions/setup-node@v1
       with:
         node-version: 12.x
-    # Publish expo app
-    - name: Expo CLI
-      uses: expo/expo-github-action@3.0.0
-      with:
-        expo-username: ${{ secrets.EXPO_CLI_USERNAME }}
-        expo-password: ${{ secrets.EXPO_CLI_PASSWORD }}
-    - run: expo publish
+    - run: yarn
+    - run: npx expo publish
