@@ -56,11 +56,11 @@ class Preload extends React.Component {
     this.setState({ loading: false });
   }
 
-  async componentWillMount() {
+  async componentDidMount() {
     try {
       // ScreenOrientation.allow(ScreenOrientation.Orientation.LANDSCAPE);
-await this.preloadAssets();
-    } catch (error){
+      await this.preloadAssets();
+    } catch (error) {
       this.setState({ error })
       console.error(error);
     }
