@@ -8,6 +8,7 @@ import Navigator from '../navigation/AppNavigator';
 import LoadingScreen from '../screens/LoadingScreen';
 
 import { loadAsync } from 'expo-font';
+import { View } from 'react-native';
 
 function cacheFonts(fonts) {
   try {
@@ -55,9 +56,14 @@ class Preload extends React.Component {
     this.setState({ loading: false });
   }
 
-  componentWillMount() {
-    // ScreenOrientation.allow(ScreenOrientation.Orientation.LANDSCAPE);
-    this.preloadAssets();
+  async componentWillMount() {
+    try {
+      // ScreenOrientation.allow(ScreenOrientation.Orientation.LANDSCAPE);
+await this.preloadAssets();
+    } catch (error){
+      this.setState({ error })
+      console.error(error);
+    }
   }
 
   get loading() {
@@ -69,6 +75,9 @@ class Preload extends React.Component {
   }
 
   render() {
+    if (this.state.error) {
+      return (<View><Text>Error loading assets</Text></View>)
+    }
     return this.state.loading ? this.loading : this.screen;
   }
 }
