@@ -2,7 +2,7 @@ import { useNavigation } from '@react-navigation/core';
 import React from 'react';
 import { Linking, StyleSheet, Text, View } from 'react-native';
 import * as Animatable from 'react-native-animatable';
-
+import Constants from 'expo-constants';
 import Button from '../components/Button';
 import MenuTitle from '../components/MenuTitle';
 
@@ -17,6 +17,8 @@ function AnimatedViewParent({ isPlaying, ...props }) {
     />
   );
 }
+import * as WebBrowser from 'expo-web-browser';
+
 
 function MenuScreen({ score, playing, onStory }) {
   const navigation = useNavigation();
@@ -46,7 +48,10 @@ function MenuScreen({ score, playing, onStory }) {
         animation={playing ? 'bounceOut' : 'pulse'}
         isPlaying={playing}
       >
-        <Button title="SONG" onPress={() => Linking.openURL(SONG_URL)} />
+        <Button title="SONG" onPress={() => {
+          // Linking.openURL(SONG_URL)
+          WebBrowser.openBrowserAsync(SONG_URL, { toolbarColor: '#ff69b4', enableBarCollapsing: true, secondaryToolbarColor: '#ffffff' });
+        }} />
       </AnimatedViewParent>
 
       <AnimatedViewParent

@@ -5,7 +5,7 @@
     "slug": "cyberspace",
     "privacy": "public",
     "version": "4.0.0",
-    "orientation": "portrait",
+    
     "scheme": "cyberspace",
     "platforms": ["ios", "android", "web"],
     "primaryColor": "#056ECF",
