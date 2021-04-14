@@ -15,9 +15,6 @@
       "resizeMode": "cover",
       "backgroundColor": "#000000"
     },
-    "packagerOpts": {
-      "config": "metro.config.js"
-    },
     "ios": {
       "appStoreUrl": "https://itunes.apple.com/us/app/sunset-cyberspace/id1332439319?ls=1&mt=8",
       "supportsTablet": true,

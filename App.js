@@ -1,7 +1,6 @@
 import '@expo/browser-polyfill';
 import './three-common';
 
-import React from 'react';
 import { StatusBar } from 'react-native';
 
 import Preload from './components/Preload';
