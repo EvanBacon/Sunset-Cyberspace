@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useRef, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 
 import AudioManager from '../AudioManager';
 import GameScreen from './GameScreen';

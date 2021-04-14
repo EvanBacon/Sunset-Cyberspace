@@ -12,6 +12,9 @@
     "android": "react-native run-android"
   },
   "dependencies": {
+    "@react-native-community/masked-view": "0.1.10",
+    "@react-navigation/native": "^5.9.4",
+    "@react-navigation/stack": "^5.14.4",
     "expo": "^41.0.0",
     "expo-av": "~9.1.2",
     "expo-gl": "~10.2.0",
@@ -33,16 +36,17 @@
     "react-native-typewriter": "^0.6.2",
     "react-native-unimodules": "~0.13.3",
     "react-native-web": "~0.13.12",
-    "react-navigation": "^4.0.7",
-    "react-navigation-stack": "^1.9.0",
     "three": "^0.108.0",
     "tween.js": "^16.6.0"
   },
   "devDependencies": {
     "@babel/core": "~7.9.0",
+    "@types/react": "~16.9.35",
+    "@types/react-native": "~0.63.2",
     "babel-jest": "~25.2.6",
     "babel-preset-expo": "8.3.0",
     "jest": "~25.2.6",
-    "react-test-renderer": "~16.13.1"
+    "react-test-renderer": "~16.13.1",
+    "typescript": "~4.0.0"
   }
 }

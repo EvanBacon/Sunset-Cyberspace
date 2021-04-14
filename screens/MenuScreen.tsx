@@ -1,3 +1,4 @@
+import { useNavigation } from '@react-navigation/core';
 import React from 'react';
 import { Linking, StyleSheet, Text, View } from 'react-native';
 import * as Animatable from 'react-native-animatable';
@@ -17,7 +18,8 @@ function AnimatedViewParent({ isPlaying, ...props }) {
   );
 }
 
-function MenuScreen({ score, playing, onStory, navigation }) {
+function MenuScreen({ score, playing, onStory }) {
+  const navigation = useNavigation();
   return (
     <View pointerEvents="box-none" style={styles.container}>
       <Animatable.View

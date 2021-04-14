@@ -1,12 +1,11 @@
-import Constants from 'expo-constants';
-import React, { Component } from 'react';
+import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import * as Animatable from 'react-native-animatable';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import { useSafeArea } from 'react-native-safe-area-context';
 import Button from '../components/Button';
 import Licenses from '../components/Licenses';
-import Data from '../licenses';
+const Data = require('../licenses');
 
 function extractNameFromGithubUrl(url) {
   if (!url) {
@@ -23,7 +22,7 @@ function extractNameFromGithubUrl(url) {
 }
 
 function sortDataByKey(data, key) {
-  data.sort(function(a, b) {
+  data.sort(function (a, b) {
     return a[key] > b[key] ? 1 : b[key] > a[key] ? -1 : 0;
   });
   return data;
@@ -66,7 +65,7 @@ const licenses = Object.keys(Data).map(key => {
 sortDataByKey(licenses, 'username');
 
 export default function LicensesScreen({ navigation }) {
-  const [top, left, bottom, right] = useSafeArea();
+  const { top, left, bottom, right } = useSafeAreaInsets();
   return (
     <View
       style={[
