@@ -2,12 +2,12 @@
   "builds": {
     "android": {
       "release": {
-        "workflow": "generic"
+        "workflow": "managed"
       }
     },
     "ios": {
       "release": {
-        "workflow": "generic"
+        "workflow": "managed"
       }
     }
   }
