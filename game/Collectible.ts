@@ -1,12 +1,12 @@
-import { loadAsync, loadObjAsync, utils } from 'expo-three';
-import { TweenMax } from 'gsap';
-import { Mesh, MeshPhongMaterial, NormalBlending, PointLight } from 'three';
+import { loadAsync, loadObjAsync, utils } from "expo-three";
+import { TweenMax } from "gsap";
+import { Mesh, MeshPhongMaterial, NormalBlending, PointLight } from "three";
 
-import Assets from '../Assets';
-import Colors from '../constants/Colors';
-import Settings from '../constants/Settings';
-import randomRange from '../utils/randomRange';
-import Node from './Node';
+import Assets from "../Assets";
+import Colors from "../constants/Colors";
+import Settings from "../constants/Settings";
+import randomRange from "../utils/randomRange";
+import Node from "./Node";
 
 const zRot = Math.PI / 8;
 
@@ -15,11 +15,11 @@ class Collectible extends Node {
   setupAsync = async () => {
     this.position.x = randomRange(
       -Settings.FLOOR_WIDTH / 2,
-      Settings.FLOOR_WIDTH / 2,
+      Settings.FLOOR_WIDTH / 2
     );
     this.position.z = randomRange(
       -Settings.FLOOR_DEPTH / 2,
-      Settings.FLOOR_DEPTH / 2,
+      Settings.FLOOR_DEPTH / 2
     );
     const collectibleMaterial = new MeshPhongMaterial({
       color: Colors.item,
@@ -32,10 +32,12 @@ class Collectible extends Node {
     });
     collectibleMaterial.flatShading = true;
 
-    this.model = await loadObjAsync({ asset: Assets.models['expo.obj'] });
+    this.model = await loadObjAsync({
+      asset: require("../assets/models/expo.obj"),
+    });
     utils.scaleLongestSideToSize(this.model, 200);
 
-    this.model.traverse(child => {
+    this.model.traverse((child) => {
       if (child instanceof Mesh) {
         child.material = collectibleMaterial;
       }

@@ -5,7 +5,11 @@
     "slug": "cyberspace",
     "privacy": "public",
     "version": "5.0.0",
-    
+    "assetBundlePatterns": [
+      "assets/fonts/*",
+      "assets/images/**/*",
+      "assets/models/*"
+    ],
     "scheme": "cyberspace",
     "platforms": ["ios", "android", "web"],
     "primaryColor": "#056ECF",
@@ -21,12 +25,6 @@
       "bundleIdentifier": "com.evanbacon.cyberspace",
       "buildNumber": "0.0.2",
       "icon": "./assets/icons/ios.png",
-      "splash": {
-        "image": "./assets/icons/splash.png",
-        "resizeMode": "cover",
-        "backgroundColor": "#000000",
-        "tabletImage": "./assets/icons/splash.png"
-      },
       "infoPlist": {
         "CFBundleDisplayName": "Cyberspace"
       }

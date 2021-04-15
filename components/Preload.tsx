@@ -1,4 +1,3 @@
-import { ScreenOrientation } from 'expo';
 // import * as AssetUtils from 'expo-asset-utils';
 import React from 'react';
 
@@ -8,7 +7,7 @@ import Navigator from '../navigation/AppNavigator';
 import LoadingScreen from '../screens/LoadingScreen';
 
 import { loadAsync } from 'expo-font';
-import { View } from 'react-native';
+import { Text, View } from 'react-native';
 
 function cacheFonts(fonts) {
   try {

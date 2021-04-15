@@ -1,13 +1,6 @@
-import { FontAwesome } from '@expo/vector-icons';
-import React, { Component } from 'react';
-import {
-  Image,
-  Linking,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import FontAwesome from '@expo/vector-icons/FontAwesome';
+import React from 'react';
+import { Image, Linking, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 export default function LicensesListItem({
   image,
@@ -53,7 +46,7 @@ export default function LicensesListItem({
               style={{ alignSelf: 'center' }}
               color={'white'}
               size={16}
-              name={'chevron-right'}
+              name="chevron-right"
             />
           </TouchableOpacity>
         </View>
