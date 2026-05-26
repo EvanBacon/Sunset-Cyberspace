@@ -1,6 +1,10 @@
 import React, { useEffect } from 'react';
+import { Platform } from 'react-native';
 
 export default function KeyboardControlsView({ children, onDown, onUp }) {
+  if (Platform.OS !== 'web') {
+    return children;
+  }
   useEffect(() => {
     const onKey = e => onDown(e);
 

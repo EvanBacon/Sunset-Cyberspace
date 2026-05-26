@@ -1,5 +1,6 @@
 import { GraphicsView } from 'expo-graphics';
-import { THREE, Renderer } from 'expo-three';
+import * as THREE from 'three';
+import Renderer from 'expo-three/build/Renderer';
 import React from 'react';
 import { PixelRatio } from 'react-native';
 import TouchableView from '../components/TouchableView';
@@ -7,8 +8,6 @@ import Colors from '../constants/Colors';
 import Game from '../game/Game';
 import DisableBodyScrollingView from '../components/DisableBodyScrollingView';
 import KeyboardControlsView from '../components/KeyboardControlsView';
-
-require('three/examples/js/shaders/FXAAShader');
 
 class GameScreen extends React.Component {
   shouldComponentUpdate = (nextProps, nextState) => false;

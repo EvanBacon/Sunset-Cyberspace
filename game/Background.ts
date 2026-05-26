@@ -1,14 +1,14 @@
-import { Mesh, MeshBasicMaterial, PlaneGeometry } from 'three';
+import { Mesh, MeshBasicMaterial, PlaneGeometry } from "three";
 
-import Assets from '../Assets';
-import { TextureLoader } from 'expo-three';
-import Node from './Node';
+import Assets from "../Assets";
+import TextureLoader from "expo-three/build/TextureLoader";
+import Node from "./Node";
 
 class Background extends Node {
   constructor() {
     super();
     this.material = new MeshBasicMaterial({
-      map: new TextureLoader().load(Assets.images['sky.png']),
+      map: new TextureLoader().load(Assets.images["sky.png"]),
       transparent: true,
       depthTest: true,
       fog: false,

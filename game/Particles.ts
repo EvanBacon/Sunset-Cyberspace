@@ -1,6 +1,6 @@
-import { TextureLoader } from 'expo-three';
-import ImprovedNoise from 'improved-noise';
-import { Platform } from 'react-native';
+import TextureLoader from "expo-three/build/TextureLoader";
+import ImprovedNoise from "improved-noise";
+import { Platform } from "react-native";
 import {
   AdditiveBlending,
   DoubleSide,
@@ -11,15 +11,15 @@ import {
   Points,
   PointsMaterial,
   Vector3,
-} from 'three';
+} from "three";
 
-import Assets from '../Assets';
-import Colors from '../constants/Colors';
-import Settings from '../constants/Settings';
-import randomRange from '../utils/randomRange';
-import Background from './Background';
+import Assets from "../Assets";
+import Colors from "../constants/Colors";
+import Settings from "../constants/Settings";
+import randomRange from "../utils/randomRange";
+import Background from "./Background";
 
-const isIPhone = Platform.OS === 'ios';
+const isIPhone = Platform.OS === "ios";
 
 const PARTICLES_COUNT = isIPhone ? 400 : 200;
 const BAR_COUNT = isIPhone ? 20 : 10;
@@ -51,15 +51,15 @@ export default class Particles {
         new Vector3(
           randomRange(-Settings.FLOOR_WIDTH / 2, Settings.FLOOR_WIDTH / 2),
           randomRange(Settings.PARTICLES_BOTTOM, Settings.PARTICLES_TOP),
-          randomRange(-Settings.FLOOR_DEPTH / 2, Settings.FLOOR_DEPTH / 2),
-        ),
+          randomRange(-Settings.FLOOR_DEPTH / 2, Settings.FLOOR_DEPTH / 2)
+        )
       );
     }
 
     const particlesMaterial = new PointsMaterial({
       size: 50,
       // sizeAttenuation: true,
-      map: new TextureLoader().load(Assets.images['particle.png']),
+      map: new TextureLoader().load(Assets.images["particle.png"]),
       transparent: true,
       blending: AdditiveBlending,
       depthTest: true,
@@ -68,7 +68,7 @@ export default class Particles {
     });
 
     this.level.moverGroup.add(
-      new Points(this.particlesGeometry, particlesMaterial),
+      new Points(this.particlesGeometry, particlesMaterial)
     );
 
     //STRIPS
@@ -100,12 +100,12 @@ export default class Particles {
 
       bar.position.x = randomRange(
         -Settings.FLOOR_WIDTH / 2,
-        Settings.FLOOR_WIDTH / 2,
+        Settings.FLOOR_WIDTH / 2
       );
       bar.position.y = randomRange(-300, 600);
       bar.position.z = randomRange(
         -Settings.FLOOR_DEPTH / 2,
-        Settings.FLOOR_DEPTH / 2,
+        Settings.FLOOR_DEPTH / 2
       );
 
       this.bars.push(bar);

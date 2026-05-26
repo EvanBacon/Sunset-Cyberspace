@@ -6,9 +6,7 @@
     "privacy": "public",
     "version": "5.0.0",
     "assetBundlePatterns": [
-      "assets/fonts/*",
-      "assets/images/**/*",
-      "assets/models/*"
+      "**/*"
     ],
     "scheme": "cyberspace",
     "platforms": ["ios", "android", "web"],

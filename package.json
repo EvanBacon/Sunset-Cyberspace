@@ -9,7 +9,8 @@
     "deploy": "netlify deploy --dir web-build/ --prod",
     "start": "react-native start",
     "ios": "react-native run-ios",
-    "android": "react-native run-android"
+    "android": "react-native run-android",
+    "report": "react-native-bundle-visualizer"
   },
   "dependencies": {
     "@expo/vector-icons": "^12.0.4",
@@ -23,7 +24,7 @@
     "expo-graphics": "^2.0.0",
     "expo-splash-screen": "~0.10.2",
     "expo-status-bar": "~1.0.4",
-    "expo-three": "^5.1.0",
+    "expo-three": "^5.6.2",
     "expo-updates": "~0.5.4",
     "expo-web-browser": "^9.1.0",
     "gsap": "^2.1.3",
@@ -39,7 +40,7 @@
     "react-native-typewriter": "^0.6.2",
     "react-native-unimodules": "~0.13.3",
     "react-native-web": "~0.13.12",
-    "three": "^0.108.0",
+    "three": "^0.117.1",
     "tween.js": "^16.6.0"
   },
   "devDependencies": {

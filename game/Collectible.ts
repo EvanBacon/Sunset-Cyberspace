@@ -1,14 +1,15 @@
-import { loadAsync, loadObjAsync, utils } from "expo-three";
+import * as utils from "./utils";
 import { TweenMax } from "gsap";
 import { Mesh, MeshPhongMaterial, NormalBlending, PointLight } from "three";
-
-import Assets from "../Assets";
+import { Asset } from "expo-asset";
 import Colors from "../constants/Colors";
 import Settings from "../constants/Settings";
 import randomRange from "../utils/randomRange";
 import Node from "./Node";
 
 const zRot = Math.PI / 8;
+
+import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader";
 
 class Collectible extends Node {
   collided = false;
@@ -32,9 +33,14 @@ class Collectible extends Node {
     });
     collectibleMaterial.flatShading = true;
 
-    this.model = await loadObjAsync({
-      asset: require("../assets/models/expo.obj"),
-    });
+    const asset = await Asset.fromModule(
+      require("../assets/models/expo.obj")
+    ).downloadAsync();
+
+    this.model = await new Promise((resolve, reject) =>
+      new OBJLoader().load(asset.localUri, resolve, () => {}, reject)
+    );
+
     utils.scaleLongestSideToSize(this.model, 200);
 
     this.model.traverse((child) => {
